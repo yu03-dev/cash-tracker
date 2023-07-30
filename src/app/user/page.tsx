@@ -1,6 +1,6 @@
 "use client";
 import { SignOutButton } from "@/components/SignOutButton";
-import { useUserContext } from "@/components/UserContext";
+import { useUserContext } from "@/hooks/context";
 import { Button } from "@/components/elements/Button";
 import {
   Record,

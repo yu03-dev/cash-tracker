@@ -1,4 +1,4 @@
-import UserProvider from "@/components/UserContext";
+import UserProvider from "@/components/UserProvider";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
