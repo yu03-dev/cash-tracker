@@ -1,4 +1,5 @@
 "use client";
+import { SignOutButton } from "@/components/SignOutButton";
 import { useUserContext } from "@/components/UserContext";
 import { Button } from "@/components/elements/Button";
 import {
@@ -18,8 +19,8 @@ export default function Page() {
 
   // example
   const postData: Record = {
-    amount: 5000,
-    purpose: "お小遣い",
+    amount: -999,
+    purpose: "ご飯",
     userId: "NhESkFqWjXaolAVkzyfKlgGZZFV2",
     timestamp: Timestamp.fromDate(new Date()),
   };
@@ -52,6 +53,13 @@ export default function Page() {
     }
   }, [user]);
 
+  const handlePost = async (postData: Record) => {
+    const addedRecord = await postRecord(postData);
+    setRecords((prevRecords) => {
+      return [addedRecord, ...prevRecords!];
+    });
+  };
+
   useEffect(() => {
     console.log(records);
   }, [records]);
@@ -74,9 +82,12 @@ export default function Page() {
               <p>Purpose:{record.purpose}</p>
             </div>
           ))}
-          <Button title="POST" onClick={() => postRecord(postData)} />
-          <Button title="UPDATE" onClick={() => updateRecord(updateData)} />
-          <Button title="DELETE" onClick={() => deleteRecord(deleteData)} />
+          <div>
+            <Button title="POST" onClick={() => handlePost(postData)} />
+            <Button title="UPDATE" onClick={() => updateRecord(updateData)} />
+            <Button title="DELETE" onClick={() => deleteRecord(deleteData)} />
+          </div>
+          <SignOutButton />
         </div>
       )}
     </div>

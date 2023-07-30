@@ -61,15 +61,15 @@ const getRecords = async (userId: string): Promise<Record[]> => {
   return records;
 };
 
-const postRecord = async (record: Record): Promise<Record[]> => {
+const postRecord = async (record: Record): Promise<Record> => {
   const collRef = collection(db, "records").withConverter(recordConverter);
   const docRef = await addDoc(collRef, record);
   const docSnap = await getDoc(docRef);
   console.log("データを追加しました");
-  return [docSnap.data()!];
+  return docSnap.data()!;
 };
 
-const updateRecord = async (record: Record): Promise<Record[] | null> => {
+const updateRecord = async (record: Record): Promise<Record | null> => {
   const docRef = doc(db, "records", record.id!).withConverter(recordConverter);
 
   // docIdで指定したdocumentのuserIdが現在のユーザと一致するときupdate
@@ -87,13 +87,13 @@ const updateRecord = async (record: Record): Promise<Record[] | null> => {
       return null;
     }
     console.log("データを更新しました");
-    return [(await getDoc(docRef)).data()!];
+    return (await getDoc(docRef)).data()!;
   }
   console.log("データが存在しません");
   return null;
 };
 
-const deleteRecord = async (record: Record): Promise<Record[] | null> => {
+const deleteRecord = async (record: Record): Promise<Record | null> => {
   const docRef = doc(db, "records", record.id!).withConverter(recordConverter);
 
   // docIdで指定したdocumentのuserIdが現在のユーザと一致するときdelete
@@ -107,7 +107,7 @@ const deleteRecord = async (record: Record): Promise<Record[] | null> => {
       return null;
     }
     console.log("データを削除しました");
-    return [docSnap.data()];
+    return docSnap.data();
   }
   console.log("データが存在しません");
   return null;
