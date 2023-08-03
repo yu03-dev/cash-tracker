@@ -1,5 +1,5 @@
 "use client";
-import { SignInButton } from "@/components/SignInButton";
+import { SignInButton } from "@/app/components/SignInButton";
 
 export default function Home() {
   return (
