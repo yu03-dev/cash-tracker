@@ -1,4 +1,5 @@
-import UserProvider from "@/components/UserProvider";
+import UserProvider from "@/app/components/UserProvider";
+import { NavbarDefault } from "@/app/components/Header";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <NavbarDefault />
         <UserProvider>{children}</UserProvider>
       </body>
     </html>
