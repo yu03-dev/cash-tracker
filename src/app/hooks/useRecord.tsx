@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 import { RecordAction, RecordType } from "../types";
 
 export const useRecord = ({
