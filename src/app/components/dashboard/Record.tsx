@@ -1,14 +1,21 @@
 import { RecordAction, RecordType } from "@/app/types";
-import React, { ChangeEvent, useCallback, useState } from "react";
-import { Button } from "@material-tailwind/react";
+import React from "react";
+import { Typography } from "@material-tailwind/react";
 import { useRecord } from "@/app/hooks/useRecord";
+import { Amount } from "./RecordColumn/Amount";
+import { Purpose } from "./RecordColumn/Purpose";
+import { EditButton } from "./RecordColumn/EditButton";
+import { DeleteButton } from "./RecordColumn/DeleteButton";
+import { timestampConverter } from "@/app/utils/timestampConverter";
 
 export const Record = ({
   record,
   actions,
+  classes,
 }: {
   record: RecordType;
   actions: RecordAction;
+  classes: string;
 }) => {
   const {
     isEditting,
@@ -22,39 +29,38 @@ export const Record = ({
   } = useRecord({ record, actions });
 
   return (
-    <div className="flex">
-      <div>{record.timestamp.toDate().toString()}</div>
-      {isEditting ? (
-        <div className="flex">
-          <form className="flex">
-            <input type="text" onChange={handleEditAmount} value={editAmount} />
-            <span>円</span>
-            <input
-              type="text"
-              onChange={handleEditPurpose}
-              value={editPurpose}
-            />
-          </form>
-          <div>
-            <Button onClick={handleIsEditing}>X</Button>
-            <Button onClick={handleEdit}>Save</Button>
-          </div>
-        </div>
-      ) : (
-        <div className="flex">
-          <div>
-            <div className="flex">
-              ---{record.amount}
-              <span>円</span>
-              <div>---{record.purpose}</div>
-            </div>
-          </div>
-          <div>
-            <Button onClick={handleIsEditing}>EDIT</Button>
-            <Button onClick={onDelete}>DELETE</Button>
-          </div>
-        </div>
-      )}
-    </div>
+    <tr>
+      <td className={classes}>
+        <Typography variant="small" color="blue-gray" className="font-normal">
+          {timestampConverter(record.timestamp)}
+        </Typography>
+      </td>
+      <td className={classes}>
+        <Amount
+          isEditting={isEditting}
+          amount={record.amount}
+          handleEditAmount={handleEditAmount}
+          editAmount={editAmount}
+        />
+      </td>
+      <td className={classes}>
+        <Purpose
+          isEditting={isEditting}
+          purpose={record.purpose}
+          handleEditPurpose={handleEditPurpose}
+          editPurpose={editPurpose}
+        />
+      </td>
+      <td className={classes}>
+        <EditButton isEditting={isEditting} handleIsEditing={handleIsEditing} />
+      </td>
+      <td className={classes}>
+        <DeleteButton
+          isEditting={isEditting}
+          handleEdit={handleEdit}
+          onDelete={onDelete}
+        />
+      </td>
+    </tr>
   );
 };

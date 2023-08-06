@@ -9,12 +9,15 @@ export default function Page() {
   return (
     <div>
       <div className="pt-10">
-        <PostForm handleAdd={handleAdd} />
-        <h1>記録</h1>
-        <RecordList
-          records={records}
-          actions={{ handleUpdate, handleDelete }}
-        />
+        <div className="flex justify-center mb-4">
+          <PostForm handleAdd={handleAdd} />
+        </div>
+        <div className="mx-auto max-w-screen-xl py-2 px-4 lg:px-8 lg:py-4">
+          <RecordList
+            records={records}
+            actions={{ handleUpdate, handleDelete }}
+          />
+        </div>
       </div>
     </div>
   );
