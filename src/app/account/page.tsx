@@ -25,7 +25,7 @@ export default function Page() {
             size="lg"
             variant="circular"
             src={user?.photoURL!}
-            alt="tania andrew"
+            alt="user icon"
           />
           <div className="flex w-full flex-col gap-0.5">
             <div className="flex items-center justify-between">
