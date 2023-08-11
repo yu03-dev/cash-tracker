@@ -1,7 +1,8 @@
-import { Timestamp } from "firebase/firestore";
+import { SecondsType } from "../types";
 
-export const timestampConverter = (timestamp: Timestamp) => {
-  const dateObject = timestamp.toDate();
+export const secondsTypeConverter = (time: SecondsType) => {
+  const millisec = time._seconds * 1000 + time._nanoseconds / 1e6;
+  const dateObject = new Date(millisec);
   const year = dateObject.getFullYear();
   const month = String(dateObject.getMonth() + 1).padStart(2, "0");
   const day = String(dateObject.getDate()).padStart(2, "0");

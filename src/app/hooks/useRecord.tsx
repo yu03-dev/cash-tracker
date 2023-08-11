@@ -9,45 +9,46 @@ export const useRecord = ({
   actions: RecordAction;
 }) => {
   const [isEditting, setIsEditting] = useState<boolean>(false);
-  const [editAmount, setEditAmount] = useState<number>(record.amount);
-  const [editPurpose, setEditPurpose] = useState<string>(record.purpose);
+  const [editPrice, setEditPrice] = useState<number>(record.price);
+  const [editCategory, setEditCategory] = useState<string>(record.category);
   const handleIsEditing = () => {
-    setEditAmount(record.amount);
-    setEditPurpose(record.purpose);
+    setEditPrice(record.price);
+    setEditCategory(record.category);
     setIsEditting((state) => !state);
   };
 
-  const handleEditAmount = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setEditAmount(Number(e.target.value));
+  const handleEditPrice = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setEditPrice(parseInt(e.target.value));
   }, []);
 
-  const handleEditPurpose = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length > 10) {
-      alert("10文字以下にしてください");
-      return;
-    }
-    setEditPurpose(e.target.value.trim());
-  }, []);
+  const handleEditCategory = useCallback(
+    (selectedValue: string | undefined) => {
+      if (selectedValue) {
+        setEditCategory(selectedValue);
+      }
+    },
+    []
+  );
 
-  const handleEdit = useCallback(() => {
-    actions.handleUpdate(record.id!, {
-      amount: editAmount,
-      purpose: editPurpose,
+  const onUpdate = useCallback(() => {
+    actions.handleUpdate(record.id, {
+      price: editPrice,
+      category: editCategory,
     });
     setIsEditting(false);
-  }, [record, editAmount, editPurpose, actions]);
+  }, [record, editPrice, editCategory, actions]);
 
   const onDelete = useCallback(() => {
-    actions.handleDelete(record.id!);
+    actions.handleDelete(record.id);
   }, [actions, record]);
   return {
     isEditting,
-    editAmount,
-    editPurpose,
+    editPrice,
+    editCategory,
     handleIsEditing,
-    handleEditAmount,
-    handleEditPurpose,
-    handleEdit,
+    handleEditPrice,
+    handleEditCategory,
+    onUpdate,
     onDelete,
   };
 };

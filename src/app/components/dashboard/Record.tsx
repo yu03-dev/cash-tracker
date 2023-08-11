@@ -1,12 +1,11 @@
 import { RecordAction, RecordType } from "@/app/types";
-import React from "react";
 import { Typography } from "@material-tailwind/react";
 import { useRecord } from "@/app/hooks/useRecord";
-import { Amount } from "./RecordColumn/Amount";
-import { Purpose } from "./RecordColumn/Purpose";
+import { Price } from "./RecordColumn/Price";
+import { Category } from "./RecordColumn/Category";
 import { EditButton } from "./RecordColumn/EditButton";
 import { DeleteButton } from "./RecordColumn/DeleteButton";
-import { timestampConverter } from "@/app/utils/timestampConverter";
+import { secondsTypeConverter } from "@/app/utils/secondsTypeConverter";
 
 export const Record = ({
   record,
@@ -19,12 +18,12 @@ export const Record = ({
 }) => {
   const {
     isEditting,
-    editAmount,
-    editPurpose,
+    editPrice,
+    editCategory,
     handleIsEditing,
-    handleEditAmount,
-    handleEditPurpose,
-    handleEdit,
+    handleEditPrice,
+    handleEditCategory,
+    onUpdate,
     onDelete,
   } = useRecord({ record, actions });
 
@@ -32,23 +31,23 @@ export const Record = ({
     <tr>
       <td className={classes}>
         <Typography variant="small" color="blue-gray" className="font-normal">
-          {timestampConverter(record.timestamp)}
+          {secondsTypeConverter(record.createdAt)}
         </Typography>
       </td>
       <td className={classes}>
-        <Amount
+        <Price
           isEditting={isEditting}
-          amount={record.amount}
-          handleEditAmount={handleEditAmount}
-          editAmount={editAmount}
+          price={record.price}
+          handleEditPrice={handleEditPrice}
+          editPrice={editPrice}
         />
       </td>
       <td className={classes}>
-        <Purpose
+        <Category
           isEditting={isEditting}
-          purpose={record.purpose}
-          handleEditPurpose={handleEditPurpose}
-          editPurpose={editPurpose}
+          category={record.category}
+          handleEditCategory={handleEditCategory}
+          editCategory={editCategory}
         />
       </td>
       <td className={classes}>
@@ -57,7 +56,7 @@ export const Record = ({
       <td className={classes}>
         <DeleteButton
           isEditting={isEditting}
-          handleEdit={handleEdit}
+          onUpdate={onUpdate}
           onDelete={onDelete}
         />
       </td>

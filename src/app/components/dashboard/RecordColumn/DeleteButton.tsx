@@ -3,17 +3,17 @@ import React from "react";
 
 export const DeleteButton = ({
   isEditting,
-  handleEdit,
+  onUpdate,
   onDelete,
 }: {
   isEditting: boolean;
-  handleEdit: () => void;
+  onUpdate: () => void;
   onDelete: () => void;
 }) => {
   return (
     <div>
       {isEditting ? (
-        <Button onClick={handleEdit}>Save</Button>
+        <Button onClick={onUpdate}>Save</Button>
       ) : (
         <Button onClick={onDelete}>Delete</Button>
       )}

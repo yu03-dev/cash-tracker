@@ -1,16 +1,16 @@
 import { Typography } from "@material-tailwind/react";
 import React, { ChangeEvent } from "react";
 
-export const Purpose = ({
+export const Price = ({
   isEditting,
-  purpose,
-  handleEditPurpose,
-  editPurpose,
+  price,
+  handleEditPrice,
+  editPrice,
 }: {
   isEditting: boolean;
-  purpose: string;
-  handleEditPurpose: (e: ChangeEvent<HTMLInputElement>) => void;
-  editPurpose: string;
+  price: number;
+  handleEditPrice: (e: ChangeEvent<HTMLInputElement>) => void;
+  editPrice: number;
 }) => {
   return (
     <div>
@@ -18,12 +18,12 @@ export const Purpose = ({
         <input
           className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
           type="text"
-          onChange={handleEditPurpose}
-          value={editPurpose}
+          onChange={handleEditPrice}
+          value={editPrice}
         />
       ) : (
         <Typography variant="small" color="blue-gray" className="font-normal">
-          {purpose}
+          {price + " 円"}
         </Typography>
       )}
     </div>

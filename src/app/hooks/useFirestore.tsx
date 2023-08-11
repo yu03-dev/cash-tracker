@@ -1,14 +1,7 @@
-import {
-  deleteRecord,
-  getRecords,
-  postRecord,
-  updateRecord,
-} from "@/app/firebase/firestore";
 import { PostType, RecordType } from "@/app/types";
 import { useCallback, useEffect, useState } from "react";
 import { useUserContext } from "./context";
 import { User } from "firebase/auth";
-import { Timestamp } from "firebase/firestore";
 
 export const useFirestore = () => {
   const [records, setRecords] = useState<RecordType[]>([]);
@@ -16,56 +9,91 @@ export const useFirestore = () => {
 
   useEffect(() => {
     const fetchRecords = async (currentUser: User) => {
-      const newRecords = await getRecords(currentUser.uid);
-      setRecords(newRecords);
+      const idToken = await currentUser.getIdToken();
+      const response = await fetch("http://localhost:3000/api/records", {
+        method: "GET",
+        headers: {
+          Authorization: idToken,
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const newRecords = (await response.json()) as RecordType[];
+        setRecords(newRecords);
+      }
     };
+
     if (user) {
       fetchRecords(user);
     }
   }, [user]);
 
   const handleAdd = useCallback(
-    ({ amount, purpose }: PostType) => {
-      const postData: RecordType = {
-        amount,
-        purpose,
-        userId: user?.uid!,
-        timestamp: Timestamp.fromDate(new Date()),
-      };
-      const setCreatedRecord = async (postData: RecordType) => {
-        const newRecord = await postRecord(postData);
-        setRecords((prevRecords) => {
-          if (prevRecords.length == 0) {
-            return [newRecord];
-          }
-          return [newRecord, ...prevRecords];
+    ({ price, category }: PostType) => {
+      const setCreatedRecord = async (
+        currentUser: User,
+        { price, category }: PostType
+      ) => {
+        const idToken = await currentUser.getIdToken();
+        const response = await fetch("http://localhost:3000/api/records", {
+          method: "POST",
+          headers: {
+            Authorization: idToken,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ price, category }),
         });
+        if (response.ok) {
+          const createdRecord = (await response.json()) as RecordType;
+          setRecords((prevRecords) => {
+            if (prevRecords.length == 0) {
+              return [createdRecord];
+            }
+            return [createdRecord, ...prevRecords];
+          });
+        }
       };
-      setCreatedRecord(postData);
+
+      if (user) {
+        setCreatedRecord(user, { price, category });
+      }
     },
     [user]
   );
 
   const handleUpdate = useCallback(
-    (docId: string, { amount, purpose }: PostType) => {
-      const setUpdatedRecord = async (userId: string) => {
-        const newRecords = [...records];
-        const editedRecord = await updateRecord(docId, userId, {
-          amount,
-          purpose,
-        });
-        if (editedRecord) {
-          const updatedRecords = newRecords.map((record) => {
+    (docId: string, { price, category }: PostType) => {
+      const setUpdatedRecord = async (
+        currentUser: User,
+        docId: string,
+        { price, category }: PostType
+      ) => {
+        const idToken = await currentUser.getIdToken();
+        const response = await fetch(
+          `http://localhost:3000/api/records/${docId}`,
+          {
+            method: "PUT",
+            headers: {
+              Authorization: idToken,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ price, category }),
+          }
+        );
+        if (response.ok) {
+          const updatedRecord = (await response.json()) as RecordType;
+          const newRecords = records.map((record) => {
             if (record.id == docId) {
-              record = editedRecord;
+              record = updatedRecord;
             }
             return record;
           });
-          setRecords(updatedRecords);
+          setRecords(newRecords);
         }
       };
+
       if (user) {
-        setUpdatedRecord(user.uid);
+        setUpdatedRecord(user, docId, { price, category });
       }
     },
     [user, records]
@@ -73,17 +101,29 @@ export const useFirestore = () => {
 
   const handleDelete = useCallback(
     (docId: string) => {
-      const setDeletedRecord = async (userId: string) => {
-        const deletedRecord = await deleteRecord(docId, userId);
-        if (deletedRecord) {
+      const setDeletedRecord = async (currentUser: User, docId: string) => {
+        const idToken = await currentUser.getIdToken();
+        const response = await fetch(
+          `http://localhost:3000/api/records/${docId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: idToken,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (response.ok) {
+          const deletedRecord = (await response.json()) as RecordType;
           const newRecords = records.filter(
-            (record) => record.id !== deletedRecord?.id
+            (record) => record.id !== deletedRecord.id
           );
           setRecords(newRecords);
         }
       };
+
       if (user) {
-        setDeletedRecord(user.uid);
+        setDeletedRecord(user, docId);
       }
     },
     [user, records]

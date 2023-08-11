@@ -1,19 +1,22 @@
-import { Timestamp } from "firebase/firestore";
+export type SecondsType = {
+  _seconds: number;
+  _nanoseconds: number;
+};
 
 export type RecordType = {
-  id?: string;
-  amount: number;
-  purpose: string;
-  userId: string;
-  timestamp: Timestamp;
+  id: string;
+  price: number;
+  category: string;
+  createdAt: SecondsType;
+  updatedAt: SecondsType;
 };
 
 export type PostType = {
-  amount: number;
-  purpose: string;
+  price: number;
+  category: string;
 };
 
 export type RecordAction = {
-  handleUpdate: (docId: string, { amount, purpose }: PostType) => void;
+  handleUpdate: (docId: string, { price, category }: PostType) => void;
   handleDelete: (docId: string) => void;
 };

@@ -1,19 +1,18 @@
 "use client";
 import { usePostForm } from "@/app/hooks/usePostForm";
 import { PostType } from "@/app/types";
-import { Button } from "@material-tailwind/react";
-import React from "react";
+import { Button, Select, Option } from "@material-tailwind/react";
 
 export const PostForm = ({
   handleAdd,
 }: {
-  handleAdd: ({ amount, purpose }: PostType) => void;
+  handleAdd: ({ price, category }: PostType) => void;
 }) => {
-  const { amount, purpose, handleAmount, handlePurpose, initializeState } =
+  const { price, category, handlePrice, handleCategory, initializeState } =
     usePostForm();
 
-  const handleClick = () => {
-    handleAdd({ amount, purpose });
+  const handleOnClick = () => {
+    handleAdd({ price, category });
     initializeState();
   };
 
@@ -23,18 +22,18 @@ export const PostForm = ({
         <div className="md:w-1/3">
           <label
             className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-            htmlFor="amount"
+            htmlFor="price"
           >
-            金額
+            Price
           </label>
         </div>
         <div className="md:w-2/3">
           <input
             className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
             type="text"
-            id="amount"
-            value={amount}
-            onChange={handleAmount}
+            id="price"
+            value={price}
+            onChange={handlePrice}
           />
         </div>
       </div>
@@ -42,25 +41,28 @@ export const PostForm = ({
         <div className="md:w-1/3">
           <label
             className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-            htmlFor="purpose"
+            htmlFor="category"
           >
-            用途
+            Category
           </label>
         </div>
         <div className="md:w-2/3">
-          <input
-            className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-            type="text"
-            id="purpose"
-            value={purpose}
-            onChange={handlePurpose}
-          />
+          <Select
+            label="Select Category"
+            onChange={handleCategory}
+            value={category}
+          >
+            <Option value="支給">(+)支給</Option>
+            <Option value="食費">(-)食費</Option>
+            <Option value="交通費">(-)交通費</Option>
+            <Option value="その他">(-)その他</Option>
+          </Select>
         </div>
       </div>
       <div className="md:flex md:items-center">
         <div className="md:w-1/3"></div>
         <div className="md:w-2/3">
-          <Button onClick={handleClick}>ADD</Button>
+          <Button onClick={handleOnClick}>ADD</Button>
         </div>
       </div>
     </form>

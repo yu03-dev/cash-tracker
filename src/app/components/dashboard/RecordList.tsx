@@ -1,9 +1,8 @@
 import { RecordAction, RecordType } from "@/app/types";
-import React from "react";
 import { Record } from "./Record";
 import { Card, Typography } from "@material-tailwind/react";
 
-const TABLE_HEAD = ["Date", "Amount", "Purpose", "Button1", "Button2"];
+const TABLE_HEAD = ["Date", "Price", "Category", "Button1", "Button2"];
 
 export const RecordList = ({
   records,
