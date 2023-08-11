@@ -1,5 +1,5 @@
 "use client";
-import { auth } from "@/app/firebase/config";
+import { auth } from "@/app/firebase/client";
 import { ReactNode } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { UserContext } from "@/app/hooks/context";
