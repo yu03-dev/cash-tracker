@@ -1,4 +1,4 @@
-import { auth } from "@/app/firebase/config";
+import { auth } from "@/app/firebase/client";
 import { Button } from "@material-tailwind/react";
 import {
   size,
