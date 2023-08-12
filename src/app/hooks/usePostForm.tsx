@@ -5,7 +5,12 @@ export const usePostForm = () => {
   const [category, setCategory] = useState<string>("");
 
   const handlePrice = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setPrice(parseInt(e.target.value));
+    const parsed = parseInt(e.target.value);
+    if (isNaN(parsed)) {
+      setPrice(0);
+    } else {
+      setPrice(parsed);
+    }
   }, []);
 
   const handleCategory = useCallback((selectedValue: string | undefined) => {
@@ -19,5 +24,11 @@ export const usePostForm = () => {
     setCategory("");
   };
 
-  return { price, category, handlePrice, handleCategory, initializeState };
+  return {
+    price,
+    category,
+    handlePrice,
+    handleCategory,
+    initializeState,
+  };
 };

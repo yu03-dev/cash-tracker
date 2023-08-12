@@ -18,7 +18,12 @@ export const useRecord = ({
   };
 
   const handleEditPrice = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setEditPrice(parseInt(e.target.value));
+    const parsed = parseInt(e.target.value);
+    if (isNaN(parsed)) {
+      setEditPrice(0);
+    } else {
+      setEditPrice(parsed);
+    }
   }, []);
 
   const handleEditCategory = useCallback(
