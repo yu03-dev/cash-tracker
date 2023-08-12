@@ -16,6 +16,7 @@ export const useFirestore = () => {
           Authorization: idToken,
           "Content-Type": "application/json",
         },
+        cache: "no-store",
       });
       if (response.ok) {
         const newRecords = (await response.json()) as RecordType[];
@@ -42,6 +43,7 @@ export const useFirestore = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ price, category }),
+          cache: "no-store",
         });
         if (response.ok) {
           const createdRecord = (await response.json()) as RecordType;
@@ -78,6 +80,7 @@ export const useFirestore = () => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({ price, category }),
+            cache: "no-store",
           }
         );
         if (response.ok) {
@@ -111,6 +114,7 @@ export const useFirestore = () => {
               Authorization: idToken,
               "Content-Type": "application/json",
             },
+            cache: "no-store",
           }
         );
         if (response.ok) {
