@@ -8,7 +8,7 @@ import {
   Avatar,
 } from "@material-tailwind/react";
 
-import { useUserContext } from "../hooks/context";
+import { useUserContext } from "../../hooks/context";
 
 export default function Page() {
   const { user, isloading } = useUserContext();
