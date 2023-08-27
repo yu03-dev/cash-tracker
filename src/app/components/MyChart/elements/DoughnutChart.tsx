@@ -23,12 +23,12 @@ const borderColor = [
 ];
 
 export const DoughnutChart = async ({
-  total,
-  category,
+  expensesTotal,
+  categories,
   expenses,
 }: ChartDataType) => {
   const chartData = {
-    labels: category,
+    labels: categories,
     datasets: [
       {
         label: "#expense",
@@ -54,7 +54,7 @@ export const DoughnutChart = async ({
       ctx.fillStyle = "#333333";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      const lines = ["Total Expense", "¥" + total.toString()];
+      const lines = ["Total Expense", "¥" + expensesTotal.toString()];
       lines.forEach((line, index) => {
         ctx.fillText(line, width / 2, top + height / 2 + index * 40 - 20);
       });

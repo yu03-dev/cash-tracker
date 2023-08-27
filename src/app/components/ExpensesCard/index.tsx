@@ -8,7 +8,7 @@ import { getTotalExpenses } from "@/utils/fetchUtils";
 
 export const ExpensesCard = async () => {
   const total = await getTotalExpenses();
-  if (typeof total !== "number") return <div>Error</div>;
+  if (typeof total === "undefined") return <div>Error</div>;
   return (
     <Card className="w-1/2">
       <CardHeader className="relative" floated={false} shadow={false}>
