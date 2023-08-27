@@ -1,5 +1,6 @@
 import { RecordsType } from "@/types";
-import { getRecords, isNotExpense } from "@/utils/firestoreUtils";
+import { getRecords } from "@/utils/firestoreUtils";
+import { isNotExpense } from "@/utils/const";
 import { getUserId } from "@/utils/session";
 import { NextResponse, type NextRequest } from "next/server";
 

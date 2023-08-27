@@ -1,12 +1,15 @@
 "use client";
 import { RecordType } from "@/types";
-import { Typography } from "@material-tailwind/react";
+import { Typography } from "@/app/components/material-tailwind-wrapper";
 import { useRecord } from "@/app/hooks/records/useRecord";
 import { Price } from "./Price";
 import { Category } from "./Category";
-import { EditButton } from "./EditButton";
-import { DeleteButton } from "./DeleteButton";
 import { secondsTypeConverter } from "@/utils/secondsTypeConverter";
+import CloseIcon from "@mui/icons-material/Close";
+import EditIcon from "@mui/icons-material/Edit";
+import CheckIcon from "@mui/icons-material/Check";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { isNotExpense } from "@/utils/const";
 
 export const Record = ({
   record,
@@ -39,6 +42,7 @@ export const Record = ({
           price={record.price}
           handleEditPrice={handleEditPrice}
           editPrice={editPrice}
+          isNotExpense={isNotExpense(record.category)}
         />
       </td>
       <td className={classes}>
@@ -50,16 +54,26 @@ export const Record = ({
         />
       </td>
       <td className={classes}>
-        <EditButton isEditting={isEditting} handleIsEditing={handleIsEditing} />
+        <div className="flex justify-end">
+          {isEditting ? (
+            <CloseIcon onClick={handleIsEditing} />
+          ) : (
+            <EditIcon onClick={handleIsEditing} />
+          )}
+        </div>
       </td>
       <td className={classes}>
-        <DeleteButton
-          isEditting={isEditting}
-          handleUpdate={() =>
-            handleUpdate({ price: editPrice, category: editCategory })
-          }
-          handleDelete={handleDelete}
-        />
+        <div className="flex justify-start">
+          {isEditting ? (
+            <CheckIcon
+              onClick={() =>
+                handleUpdate({ price: editPrice, category: editCategory })
+              }
+            />
+          ) : (
+            <DeleteForeverIcon onClick={handleDelete} />
+          )}
+        </div>
       </td>
     </tr>
   );

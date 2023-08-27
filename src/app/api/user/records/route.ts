@@ -1,4 +1,4 @@
-import { auth, db } from "@/firebase/admin";
+import { db } from "@/firebase/admin";
 import { PostType, RecordsType } from "@/types";
 import { getUserId } from "@/utils/session";
 import { FieldValue } from "firebase-admin/firestore";
