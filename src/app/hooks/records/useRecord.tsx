@@ -58,23 +58,25 @@ export const useRecord = (record: RecordType) => {
   );
 
   const handleDelete = useCallback(async () => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/records/${record.id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const parsedResponse = await response.json();
-      console.log(parsedResponse);
-    } catch (error) {
-      console.error(error);
+    if (confirm("本当に削除しますか?")) {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/records/${record.id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const parsedResponse = await response.json();
+        console.log(parsedResponse);
+      } catch (error) {
+        console.error(error);
+      }
+      router.refresh();
+      setIsEditting(false);
     }
-    router.refresh();
-    setIsEditting(false);
   }, [record, router]);
 
   return {

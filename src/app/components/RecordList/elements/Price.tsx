@@ -6,11 +6,13 @@ export const Price = ({
   price,
   handleEditPrice,
   editPrice,
+  isNotExpense,
 }: {
   isEditting: boolean;
   price: number;
   handleEditPrice: (e: ChangeEvent<HTMLInputElement>) => void;
   editPrice: number;
+  isNotExpense: boolean;
 }) => {
   return (
     <div>
@@ -21,9 +23,21 @@ export const Price = ({
           onChange={handleEditPrice}
           value={editPrice == 0 ? "" : editPrice}
         />
+      ) : isNotExpense ? (
+        <Typography
+          variant="paragraph"
+          color="green"
+          className="font-normal w-full"
+        >
+          {`+${price} 円`}
+        </Typography>
       ) : (
-        <Typography variant="small" color="blue-gray" className="font-normal">
-          {price + " 円"}
+        <Typography
+          variant="paragraph"
+          color="blue-gray"
+          className="font-normal w-full"
+        >
+          {`${price} 円`}
         </Typography>
       )}
     </div>

@@ -15,7 +15,7 @@ export const Category = ({
   return (
     <div>
       {isEditting ? (
-        <div className="w-72">
+        <div>
           <Select
             label="Select Version"
             onChange={handleEditCategory}
@@ -28,7 +28,11 @@ export const Category = ({
           </Select>
         </div>
       ) : (
-        <Typography variant="small" color="blue-gray" className="font-normal">
+        <Typography
+          variant="paragraph"
+          color="blue-gray"
+          className="font-normal w-full"
+        >
           {category}
         </Typography>
       )}

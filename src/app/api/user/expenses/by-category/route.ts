@@ -1,6 +1,6 @@
 import { db } from "@/firebase/admin";
 import { ExpensesByCategoryType, RecordsType } from "@/types";
-import { isNotExpense } from "@/utils/firestoreUtils";
+import { isNotExpense } from "@/utils/const";
 import { getUserId } from "@/utils/session";
 import { NextResponse, type NextRequest } from "next/server";
 
