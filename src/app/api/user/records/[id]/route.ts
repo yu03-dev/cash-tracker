@@ -1,5 +1,5 @@
 import { db } from "@/firebase/admin";
-import { PostType } from "@/types";
+import { zPostData } from "@/types";
 import { getUserId } from "@/utils/session";
 import { FieldValue } from "firebase-admin/firestore";
 import { NextResponse, type NextRequest } from "next/server";
@@ -12,7 +12,7 @@ export const PUT = async (
   try {
     const uid = await getUserId(sessionCookie!);
     const docId = params.id;
-    const body = (await request.json()) as PostType;
+    const body = zPostData.parse(await request.json());
     const docRef = db
       .collection("users")
       .doc(uid)

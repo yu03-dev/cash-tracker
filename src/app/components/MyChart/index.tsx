@@ -2,12 +2,13 @@ import { DoughnutChart } from "./elements/DoughnutChart";
 import { getChartData } from "@/utils/fetchUtils";
 
 export const MyChart = async () => {
-  const { expensesTotal, category, expenses } = await getChartData();
-
+  const chartData = await getChartData();
+  if (!chartData) return <div>Error</div>;
+  const { expensesTotal, categories, expenses } = chartData;
   return (
     <DoughnutChart
-      total={expensesTotal}
-      category={category}
+      expensesTotal={expensesTotal}
+      categories={categories}
       expenses={expenses}
     />
   );

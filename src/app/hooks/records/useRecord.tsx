@@ -1,5 +1,5 @@
 import { ChangeEvent, useCallback, useState } from "react";
-import { PostType, RecordType } from "@/types";
+import { PostDataType, RecordType, zMessageResponse } from "@/types";
 import { useRouter } from "next/navigation";
 
 export const useRecord = (record: RecordType) => {
@@ -34,7 +34,7 @@ export const useRecord = (record: RecordType) => {
   );
 
   const handleUpdate = useCallback(
-    async ({ price, category }: PostType) => {
+    async ({ price, category }: PostDataType) => {
       try {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/records/${record.id}`,
@@ -46,10 +46,17 @@ export const useRecord = (record: RecordType) => {
             body: JSON.stringify({ price, category }),
           }
         );
-        const parsedResponse = await response.json();
-        console.log(parsedResponse);
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        const { message } = zMessageResponse.parse(await response.json());
+        console.log(message);
       } catch (error) {
-        console.error(error);
+        if (error instanceof Error) {
+          console.error("Error", error.message);
+        } else {
+          console.error(error);
+        }
       }
       router.refresh();
       setIsEditting(false);
@@ -69,10 +76,17 @@ export const useRecord = (record: RecordType) => {
             },
           }
         );
-        const parsedResponse = await response.json();
-        console.log(parsedResponse);
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        const { message } = zMessageResponse.parse(await response.json());
+        console.log(message);
       } catch (error) {
-        console.error(error);
+        if (error instanceof Error) {
+          console.error("Error", error.message);
+        } else {
+          console.error(error);
+        }
       }
       router.refresh();
       setIsEditting(false);

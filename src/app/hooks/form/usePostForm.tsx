@@ -1,4 +1,4 @@
-import { PostType } from "@/types";
+import { PostDataType, zMessageResponse } from "@/types";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useCallback, useState } from "react";
 
@@ -23,7 +23,7 @@ export const usePostForm = () => {
   }, []);
 
   const handleAdd = useCallback(
-    async ({ price, category }: PostType) => {
+    async ({ price, category }: PostDataType) => {
       try {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/records`,
@@ -35,10 +35,17 @@ export const usePostForm = () => {
             body: JSON.stringify({ price, category }),
           }
         );
-        const parsedResponse = await response.json();
-        console.log(parsedResponse);
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        const { message } = zMessageResponse.parse(await response.json());
+        console.log(message);
       } catch (error) {
-        console.error(error);
+        if (error instanceof Error) {
+          console.error("Error", error.message);
+        } else {
+          console.error(error);
+        }
       }
       router.push("/records/index");
       router.refresh();

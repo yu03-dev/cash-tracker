@@ -6,9 +6,9 @@ import {
   Typography,
 } from "@/app/components/material-tailwind-wrapper";
 import { StarIcon } from "./StarIcon";
-import { ProfileType } from "@/types";
+import { ProfileDataType } from "@/types";
 
-export const Profile = ({ name, picture, email, comment }: ProfileType) => {
+export const Profile = ({ name, picture, email, comment }: ProfileDataType) => {
   return (
     <Card
       color="transparent"

@@ -1,12 +1,12 @@
 import { auth } from "@/firebase/admin";
-import { zAuthBody } from "@/types";
+import { zIdToken } from "@/types";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (request: NextRequest) => {
   try {
     const body = await request.json();
-    const { idToken } = zAuthBody.parse(body);
+    const { idToken } = zIdToken.parse(body);
     const expiresIn = 60 * 60 * 24 * 3 * 1000;
     const sessionCookie = await auth.createSessionCookie(idToken, {
       expiresIn,

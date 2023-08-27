@@ -1,7 +1,9 @@
-import { zRecords } from "@/types";
+import { zChartData, zProfileData, zRecords } from "@/types";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { z } from "zod";
 
+// コンポーネント側でエラーハンドリングする?
 export const getRecordsData = async () => {
   const cookieStore = cookies();
   const sessionCookie = cookieStore.get("session")?.value;
@@ -19,10 +21,17 @@ export const getRecordsData = async () => {
           cache: "no-store",
         }
       );
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
       const records = zRecords.parse(await response.json());
       return records;
     } catch (error) {
-      console.error(error);
+      if (error instanceof Error) {
+        console.error("Error", error.message);
+      } else {
+        console.error(error);
+      }
     }
   }
 };
@@ -32,18 +41,29 @@ export const getChartData = async () => {
   if (!sessionCookie) {
     redirect("/");
   } else {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/expenses/by-category`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: sessionCookie,
-        },
-        cache: "no-store",
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/expenses/by-category`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: sessionCookie,
+          },
+          cache: "no-store",
+        }
+      );
+      if (!response.ok) {
+        throw new Error(response.statusText);
       }
-    );
-    const parsedResponse = await response.json();
-    return { ...parsedResponse };
+      const chartData = zChartData.parse(await response.json());
+      return { ...chartData };
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Error", error.message);
+      } else {
+        console.error(error);
+      }
+    }
   }
 };
 
@@ -52,18 +72,29 @@ export const getProfileData = async () => {
   if (!sessionCookie) {
     redirect("/");
   } else {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/profile`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: sessionCookie,
-        },
-        cache: "no-store",
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/profile`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: sessionCookie,
+          },
+          cache: "no-store",
+        }
+      );
+      if (!response.ok) {
+        throw new Error(response.statusText);
       }
-    );
-    const parsedResponse = await response.json();
-    return { ...parsedResponse };
+      const profileData = zProfileData.parse(await response.json());
+      return { ...profileData };
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Error", error.message);
+      } else {
+        console.error(error);
+      }
+    }
   }
 };
 
@@ -72,17 +103,28 @@ export const getTotalExpenses = async () => {
   if (!sessionCookie) {
     redirect("/");
   } else {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/expenses/total`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: sessionCookie,
-        },
-        cache: "no-store",
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/expenses/total`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: sessionCookie,
+          },
+          cache: "no-store",
+        }
+      );
+      if (!response.ok) {
+        throw new Error(response.statusText);
       }
-    );
-    const parsedResponse = await response.json();
-    return parsedResponse;
+      const total = z.number().parse(await response.json());
+      return total;
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Error", error.message);
+      } else {
+        console.error(error);
+      }
+    }
   }
 };

@@ -1,5 +1,5 @@
 import { db } from "@/firebase/admin";
-import { PostType, RecordsType } from "@/types";
+import { RecordsType, zPostData } from "@/types";
 import { getUserId } from "@/utils/session";
 import { FieldValue } from "firebase-admin/firestore";
 import { NextResponse, type NextRequest } from "next/server";
@@ -30,7 +30,7 @@ export const POST = async (request: NextRequest) => {
   try {
     const uid = await getUserId(sessionCookie!);
     const userRecordRef = db.collection("users").doc(uid).collection("records");
-    const body = (await request.json()) as PostType;
+    const body = zPostData.parse(await request.json());
     await userRecordRef.add({
       ...body,
       createdAt: FieldValue.serverTimestamp(),
