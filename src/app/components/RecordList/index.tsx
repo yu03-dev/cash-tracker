@@ -1,11 +1,12 @@
-"use client";
-import { RecordsType } from "@/types";
 import { Record } from "./elements/Record";
-import { Card, Typography } from "@material-tailwind/react";
+import { Card, Typography } from "@/app/components/material-tailwind-wrapper";
+import { getRecordsData } from "@/utils/fetchUtils";
 
 const TABLE_HEAD = ["Date", "Price", "Category", "Button1", "Button2"];
 
-export const RecordList = async ({ records }: { records: RecordsType }) => {
+export const RecordList = async () => {
+  const records = await getRecordsData();
+  if (!records) return <div>Error</div>;
   return (
     <Card className="w-full h-full overflow-scroll">
       <table className="w-full min-w-max table-auto text-left">
