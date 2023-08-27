@@ -20,16 +20,6 @@ export const NavList = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <Link href="/dashboard" className="flex items-center">
-          Dashboard
-        </Link>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
         <Link href="/records/index" className="flex items-center">
           Records
         </Link>
@@ -42,6 +32,26 @@ export const NavList = () => {
       >
         <Link href="/records/add" className="flex items-center">
           Add
+        </Link>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <Link href="/chart" className="flex items-center">
+          Chart
+        </Link>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <Link href="/profile" className="flex items-center">
+          Profile
         </Link>
       </Typography>
     </ul>
