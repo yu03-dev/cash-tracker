@@ -20,7 +20,7 @@ export const NavList = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <Link href="/records/index" className="flex items-center">
+        <Link href="/records" className="flex items-center">
           Records
         </Link>
       </Typography>

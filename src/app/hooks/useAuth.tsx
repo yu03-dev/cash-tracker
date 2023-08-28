@@ -53,7 +53,7 @@ export const useAuth = () => {
       const idToken = await user.getIdToken();
       const message = await login(idToken);
       console.log(message);
-      router.push("/records/index");
+      router.push("/records");
     } catch (error) {
       if (error instanceof Error) {
         console.error("Error", error.message);
