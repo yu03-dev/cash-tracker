@@ -30,7 +30,7 @@ export const zProfileData = z.object({
   name: z.string(),
   picture: z.string(),
   email: z.string(),
-  comment: z.string(),
+  comment: z.string().optional(),
 });
 
 export const zIdToken = z.object({
