@@ -22,7 +22,12 @@ export const GET = async (request: NextRequest) => {
   try {
     const uid = await getUserId(sessionCookie!);
     const records = await getRecords(uid);
-    const total = getTotal(records);
+    let total;
+    if (records.length === 0) {
+      total = 0;
+    } else {
+      total = getTotal(records);
+    }
     return NextResponse.json(total);
   } catch (error) {
     console.log(error);

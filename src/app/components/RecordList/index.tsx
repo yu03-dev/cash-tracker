@@ -6,7 +6,17 @@ const TABLE_HEAD = ["Date", "Price", "Category", "", " "];
 
 export const RecordList = async () => {
   const records = await getRecordsData();
-  if (!records) return <div>記録がありません</div>;
+  if (!records) return <div>エラーが発生しました</div>;
+  if (records.length === 0)
+    return (
+      <Typography
+        variant="h3"
+        color="blue-gray"
+        className="flex justify-center"
+      >
+        記録がありません。
+      </Typography>
+    );
   return (
     <Card className="w-full h-full overflow-scroll">
       <table className="w-full min-w-max table-auto text-left">

@@ -47,7 +47,7 @@ export const usePostForm = () => {
           console.error(error);
         }
       }
-      router.push("/records/index");
+      router.push("/records");
       router.refresh();
     },
     [router]

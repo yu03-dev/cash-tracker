@@ -1,18 +1,9 @@
 import { db } from "@/firebase/admin";
-import { RecordsType, zPostData } from "@/types";
+import { zPostData } from "@/types";
+import { getOrderedRecords } from "@/utils/firestoreUtils";
 import { getUserId } from "@/utils/session";
 import { FieldValue } from "firebase-admin/firestore";
 import { NextResponse, type NextRequest } from "next/server";
-
-const getOrderedRecords = async (uid: string) => {
-  const userRecordRef = db.collection("users").doc(uid).collection("records");
-  const snapshot = await userRecordRef.orderBy("createdAt", "desc").get();
-  const records = snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  })) as RecordsType;
-  return records;
-};
 
 export const GET = async (request: NextRequest) => {
   const sessionCookie = request.headers.get("Authorization");

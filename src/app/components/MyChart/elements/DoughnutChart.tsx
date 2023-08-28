@@ -54,7 +54,7 @@ export const DoughnutChart = async ({
       ctx.fillStyle = "#333333";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      const lines = ["Total Expense", "¥" + expensesTotal.toString()];
+      const lines = ["合計使用金額", "¥" + expensesTotal.toString()];
       lines.forEach((line, index) => {
         ctx.fillText(line, width / 2, top + height / 2 + index * 40 - 20);
       });
