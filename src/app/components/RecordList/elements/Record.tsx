@@ -5,11 +5,14 @@ import { useRecord } from "@/app/hooks/records/useRecord";
 import { Price } from "./Price";
 import { Category } from "./Category";
 import { secondsTypeConverter } from "@/utils/secondsTypeConverter";
-import CloseIcon from "@mui/icons-material/Close";
-import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { isNotExpense } from "@/utils/const";
+import {
+  Popover,
+  PopoverContent,
+  PopoverHandler,
+} from "@material-tailwind/react";
 
 export const Record = ({
   record,
@@ -32,8 +35,19 @@ export const Record = ({
   return (
     <tr>
       <td className={classes}>
-        <Typography variant="small" color="blue-gray" className="font-normal">
-          {secondsTypeConverter(record.createdAt)}
+        <Typography
+          variant="paragraph"
+          color="blue-gray"
+          className="font-normal md:hidden"
+        >
+          {secondsTypeConverter(record.createdAt, 1)}
+        </Typography>
+        <Typography
+          variant="paragraph"
+          color="blue-gray"
+          className="font-normal hidden md:block"
+        >
+          {secondsTypeConverter(record.createdAt, 0)}
         </Typography>
       </td>
       <td className={classes}>
@@ -54,26 +68,27 @@ export const Record = ({
         />
       </td>
       <td className={classes}>
-        <div className="flex justify-end">
-          {isEditting ? (
-            <CloseIcon onClick={handleIsEditing} />
-          ) : (
-            <EditIcon onClick={handleIsEditing} />
-          )}
-        </div>
-      </td>
-      <td className={classes}>
-        <div className="flex justify-start">
-          {isEditting ? (
+        {isEditting ? (
+          <div className="text-right">
             <CheckIcon
               onClick={() =>
                 handleUpdate({ price: editPrice, category: editCategory })
               }
             />
-          ) : (
-            <DeleteForeverIcon onClick={handleDelete} />
-          )}
-        </div>
+          </div>
+        ) : (
+          <div className="text-right">
+            <Popover placement="bottom-end">
+              <PopoverHandler>
+                <MoreVertIcon />
+              </PopoverHandler>
+              <PopoverContent className="flex flex-col">
+                <div onClick={handleIsEditing}>編集</div>
+                <div onClick={handleDelete}>削除</div>
+              </PopoverContent>
+            </Popover>
+          </div>
+        )}
       </td>
     </tr>
   );
