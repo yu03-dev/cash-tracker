@@ -2,7 +2,7 @@ import { Record } from "./elements/Record";
 import { Card, Typography } from "@/app/components/material-tailwind-wrapper";
 import { getRecordsData } from "@/utils/fetchUtils";
 
-const TABLE_HEAD = ["Date", "Price", "Category", "", " "];
+const TABLE_HEAD = ["Date", "Price", "Category", ""];
 
 export const RecordList = async () => {
   const records = await getRecordsData();
@@ -18,18 +18,16 @@ export const RecordList = async () => {
       </Typography>
     );
   return (
-    <Card className="w-full h-full overflow-scroll">
+    <Card className="w-full h-full overflow-y-scroll">
       <table className="w-full min-w-max table-auto text-left">
         <thead>
           <tr>
-            {TABLE_HEAD.map((head, index) => {
-              const length = TABLE_HEAD.length;
-              const isButton = index >= length - 2;
-              const classes = isButton
-                ? "border-b border-blue-gray-100 bg-blue-gray-50 p-4 w-1/8"
-                : "border-b border-blue-gray-100 bg-blue-gray-50 p-4 w-1/4";
+            {TABLE_HEAD.map((head) => {
               return (
-                <th key={head} className={classes}>
+                <th
+                  key={head}
+                  className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                >
                   <Typography
                     variant="small"
                     color="blue-gray"
