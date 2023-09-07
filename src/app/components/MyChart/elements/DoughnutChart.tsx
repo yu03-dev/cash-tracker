@@ -50,7 +50,7 @@ export const DoughnutChart = async ({
       } = chart;
       ctx.save();
       ctx.fillRect(width / 2, top + height / 2, 0, 0);
-      ctx.font = "30px sans-serif";
+      ctx.font = "20px sans-serif";
       ctx.fillStyle = "#333333";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
@@ -66,7 +66,7 @@ export const DoughnutChart = async ({
       data={chartData}
       options={options}
       plugins={[textCenter]}
-      className="w-full"
+      className="w-auto"
     />
   );
 };
