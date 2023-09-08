@@ -1,6 +1,6 @@
 "use client";
 import { RecordType } from "@/types";
-import { Typography } from "@/app/components/material-tailwind-wrapper";
+import { Typography } from "@/app/common/material-tailwind";
 import { useRecord } from "@/app/hooks/records/useRecord";
 import { Price } from "./Price";
 import { Category } from "./Category";

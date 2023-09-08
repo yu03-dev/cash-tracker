@@ -1,5 +1,5 @@
 "use client";
-import { createRecord } from "@/app/store/api/records";
+import { createRecord } from "@/app/store/api/client/records";
 import {
   Button,
   Card,

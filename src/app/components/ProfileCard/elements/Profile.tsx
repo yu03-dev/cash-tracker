@@ -4,7 +4,7 @@ import {
   CardHeader,
   Avatar,
   Typography,
-} from "@/app/components/material-tailwind-wrapper";
+} from "@/app/common/material-tailwind";
 import { StarIcon } from "./StarIcon";
 import { ProfileDataType } from "@/types";
 
