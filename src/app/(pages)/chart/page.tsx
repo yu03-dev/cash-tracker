@@ -1,5 +1,5 @@
 import { MyChart } from "@/app/components/MyChart";
-import { Card, CardBody, Typography } from "@/app/common/material-tailwind";
+import { Card, CardBody, Typography } from "@/app/common/lib/material-tailwind";
 
 export default function Page() {
   return (

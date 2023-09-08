@@ -6,7 +6,7 @@ import {
   IconButton,
   Collapse,
   Button,
-} from "@material-tailwind/react";
+} from "@/app/common/lib/material-tailwind";
 import { HamburgerMenu } from "./elements/HamburgerMenu";
 import { CloseButton } from "./elements/CloseButton";
 import { NavList } from "./elements/NavList";

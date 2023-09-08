@@ -3,7 +3,7 @@ import {
   CardHeader,
   CardBody,
   Typography,
-} from "@/app/common/material-tailwind";
+} from "@/app/common/lib/material-tailwind";
 import { fetchData } from "@/app/store/api/server/fetchData";
 import { z } from "zod";
 

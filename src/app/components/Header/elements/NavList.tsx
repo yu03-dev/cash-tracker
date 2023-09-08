@@ -1,4 +1,4 @@
-import { Typography } from "@material-tailwind/react";
+import { Typography } from "@/app/common/lib/material-tailwind";
 import Link from "next/link";
 
 export const NavList = () => {

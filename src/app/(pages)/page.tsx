@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@material-tailwind/react";
+import { Button } from "@/app/common/lib/material-tailwind";
 import { useAuth } from "../hooks/useAuth";
 
 export default function Home() {

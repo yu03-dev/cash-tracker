@@ -1,6 +1,6 @@
 "use client";
 
-import { BoxError } from "@/app/common/BoxError";
+import { BoxError } from "@/app/common/components/BoxError";
 import { useEffect } from "react";
 
 export default function Error({

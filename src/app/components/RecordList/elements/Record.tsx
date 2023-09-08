@@ -1,6 +1,6 @@
 "use client";
 import { RecordType } from "@/types";
-import { Typography } from "@/app/common/material-tailwind";
+import { Typography } from "@/app/common/lib/material-tailwind";
 import { useRecord } from "@/app/hooks/records/useRecord";
 import { Price } from "./Price";
 import { Category } from "./Category";
@@ -12,7 +12,7 @@ import {
   Popover,
   PopoverContent,
   PopoverHandler,
-} from "@material-tailwind/react";
+} from "@/app/common/lib/material-tailwind";
 
 export const Record = ({
   record,

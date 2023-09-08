@@ -7,7 +7,7 @@ import {
   Option,
   Select,
   Typography,
-} from "@material-tailwind/react";
+} from "@/app/common/lib/material-tailwind";
 import { useRouter } from "next/navigation";
 import React, { useCallback } from "react";
 import { Controller, useForm } from "react-hook-form";

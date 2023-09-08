@@ -1,4 +1,4 @@
-import { Option, Select, Typography } from "@material-tailwind/react";
+import { Option, Select, Typography } from "@/app/common/lib/material-tailwind";
 import React from "react";
 
 export const Category = ({

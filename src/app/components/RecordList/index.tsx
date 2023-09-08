@@ -1,5 +1,5 @@
 import { Record } from "./elements/Record";
-import { Card, Typography } from "@/app/common/material-tailwind";
+import { Card, Typography } from "@/app/common/lib/material-tailwind";
 import { fetchData } from "@/app/store/api/server/fetchData";
 import { RecordsType, zRecords } from "@/types";
 
