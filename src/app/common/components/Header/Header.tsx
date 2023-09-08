@@ -7,9 +7,9 @@ import {
   Collapse,
   Button,
 } from "@/app/common/lib/material-tailwind";
-import { HamburgerMenu } from "./elements/HamburgerMenu";
-import { CloseButton } from "./elements/CloseButton";
-import { NavList } from "./elements/NavList";
+import { HamburgerMenu } from "../../icons/HamburgerMenu";
+import { CloseButton } from "../../icons/CloseButton";
+import { NavList } from "./NavList";
 import { useHeader } from "@/app/hooks/useHeader";
 import { useAuth } from "@/app/hooks/useAuth";
 

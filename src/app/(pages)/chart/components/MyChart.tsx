@@ -1,4 +1,4 @@
-import { DoughnutChart } from "./elements/DoughnutChart";
+import { DoughnutChart } from "./DoughnutChart";
 import { Typography } from "@/app/common/lib/material-tailwind";
 import { fetchData } from "@/app/store/api/server/fetchData";
 import { ChartDataType, zChartData } from "@/types";

@@ -1,5 +1,5 @@
-import { ExpensesCard } from "@/app/components/ExpensesCard";
-import { RecordList } from "@/app/components/RecordList";
+import { ExpensesCard } from "@/app/(pages)/records/components/ExpensesCard";
+import { RecordList } from "@/app/(pages)/records/components/RecordList";
 
 export default async function Page() {
   return (

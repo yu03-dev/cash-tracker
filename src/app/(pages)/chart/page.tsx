@@ -1,4 +1,4 @@
-import { MyChart } from "@/app/components/MyChart";
+import { MyChart } from "@/app/(pages)/chart/components";
 import { Card, CardBody, Typography } from "@/app/common/lib/material-tailwind";
 
 export default function Page() {
