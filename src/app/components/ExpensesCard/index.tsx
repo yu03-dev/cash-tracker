@@ -3,12 +3,15 @@ import {
   CardHeader,
   CardBody,
   Typography,
-} from "@/app/components/material-tailwind-wrapper";
-import { getTotalExpenses } from "@/utils/fetchUtils";
+} from "@/app/common/material-tailwind";
+import { fetchData } from "@/app/store/api/server/fetchData";
+import { z } from "zod";
 
 export const ExpensesCard = async () => {
-  const total = await getTotalExpenses();
-  if (typeof total === "undefined") return <div>Error</div>;
+  const total = await fetchData<number>({
+    uri: "/api/user/expenses/total",
+    schema: z.number(),
+  });
   return (
     <Card>
       <CardHeader className="relative" floated={false} shadow={false}>

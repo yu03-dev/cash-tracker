@@ -1,12 +1,15 @@
 import { Record } from "./elements/Record";
-import { Card, Typography } from "@/app/components/material-tailwind-wrapper";
-import { getRecordsData } from "@/utils/fetchUtils";
+import { Card, Typography } from "@/app/common/material-tailwind";
+import { fetchData } from "@/app/store/api/server/fetchData";
+import { RecordsType, zRecords } from "@/types";
 
 const TABLE_HEAD = ["Date", "Price", "Category", ""];
 
 export const RecordList = async () => {
-  const records = await getRecordsData();
-  if (!records) return <div>エラーが発生しました</div>;
+  const records = await fetchData<RecordsType>({
+    uri: "/api/user/records",
+    schema: zRecords,
+  });
   if (records.length === 0)
     return (
       <Typography

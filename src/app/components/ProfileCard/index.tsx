@@ -1,9 +1,12 @@
+import { fetchData } from "@/app/store/api/server/fetchData";
 import { Profile } from "./elements/Profile";
-import { getProfileData } from "@/utils/fetchUtils";
+import { ProfileDataType, zProfileData } from "@/types";
 
 export const ProfileCard = async () => {
-  const profileData = await getProfileData();
-  if (!profileData) return <div>Errorが発生しました</div>;
+  const profileData = await fetchData<ProfileDataType>({
+    uri: "/api/user/profile",
+    schema: zProfileData,
+  });
   const { name, picture, email, comment } = profileData;
   return (
     <Profile
