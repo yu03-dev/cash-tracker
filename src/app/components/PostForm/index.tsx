@@ -40,6 +40,7 @@ export const PostForm = () => {
       await createRecord({ ...submitData });
       reset();
       router.push("/records");
+      router.refresh();
     },
     [reset, router]
   );
