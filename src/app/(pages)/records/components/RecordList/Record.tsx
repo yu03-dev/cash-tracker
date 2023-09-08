@@ -4,10 +4,10 @@ import { Typography } from "@/app/common/lib/material-tailwind";
 import { useRecord } from "@/app/hooks/records/useRecord";
 import { Price } from "./Price";
 import { Category } from "./Category";
-import { secondsTypeConverter } from "@/utils/secondsTypeConverter";
+import { secondsTypeConverter } from "@/utils/time_converter";
 import CheckIcon from "@mui/icons-material/Check";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { isNotExpense } from "@/utils/const";
+import { isNotExpense } from "@/utils/expense";
 import {
   Popover,
   PopoverContent,

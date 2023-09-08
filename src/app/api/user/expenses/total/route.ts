@@ -1,7 +1,7 @@
 import { RecordsType } from "@/types";
-import { getRecords } from "@/utils/firestoreUtils";
-import { isNotExpense } from "@/utils/const";
-import { getUserId } from "@/utils/session";
+import { getRecords } from "@/utils/firestore_query";
+import { isNotExpense } from "@/utils/expense";
+import { getUserInformation } from "@/utils/session";
 import { NextResponse, type NextRequest } from "next/server";
 
 const getTotal = (records: RecordsType) => {
@@ -20,7 +20,7 @@ const getTotal = (records: RecordsType) => {
 export const GET = async (request: NextRequest) => {
   const sessionCookie = request.headers.get("Authorization");
   try {
-    const uid = await getUserId(sessionCookie!);
+    const { uid } = await getUserInformation(sessionCookie!);
     const records = await getRecords(uid);
     let total;
     if (records.length === 0) {
