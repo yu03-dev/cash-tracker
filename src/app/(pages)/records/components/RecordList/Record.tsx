@@ -9,7 +9,7 @@ import {
   PopoverContent,
   PopoverHandler,
 } from "@/app/common/lib/material-tailwind";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { UpdateFormDialog } from "./UpdateFormDialog";
 import { DeleteDialog } from "./DeleteDialog";
 
@@ -33,6 +33,8 @@ export const Record = ({
   record: RecordType;
   classes: string;
 }) => {
+  const [onlyDate, setOnlyDate] = useState<string>("");
+  const [timeStamp, setTimeStamp] = useState<string>("");
   const [isOpenUpdateDialog, setIsOpenUpdateDialog] = useState<boolean>(false);
   const handleOpenUpdateDialog = () => setIsOpenUpdateDialog((prev) => !prev);
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState<boolean>(false);
@@ -45,6 +47,13 @@ export const Record = ({
     currentCategory: category,
   };
 
+  useEffect(() => {
+    const date1 = TimeConverter(createdAt, "day");
+    const date2 = TimeConverter(createdAt, "seconds");
+    if (date1) setOnlyDate(date1);
+    if (date2) setTimeStamp(date2);
+  }, [createdAt]);
+
   return (
     <>
       <tr>
@@ -54,10 +63,8 @@ export const Record = ({
             color="blue-gray"
             className="font-normal"
           >
-            <span className="md:hidden">{TimeConverter(createdAt, "day")}</span>
-            <span className="hidden md:block">
-              {TimeConverter(createdAt, "seconds")}
-            </span>
+            <span className="md:hidden">{onlyDate}</span>
+            <span className="hidden md:block">{timeStamp}</span>
           </Typography>
         </td>
         <td className={classes}>
