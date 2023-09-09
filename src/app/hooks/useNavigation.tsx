@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-export const useHeader = () => {
+export const useNavigation = () => {
   const [openNav, setOpenNav] = useState(false);
 
   useEffect(() => {
