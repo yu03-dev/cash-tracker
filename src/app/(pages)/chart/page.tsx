@@ -1,10 +1,11 @@
 import { MyChart } from "@/app/(pages)/chart/components";
+import { FlexContainer } from "@/app/common/components/FlexContainer";
 import { Card, CardBody, Typography } from "@/app/common/lib/material-tailwind";
 
 export default function Page() {
   return (
-    <div>
-      <Card className="mx-auto w-96 rounded-xl mt-8">
+    <FlexContainer>
+      <Card className="w-96 rounded-xl">
         <CardBody>
           <Typography variant="h4" color="blue-gray" className="mb-2 underline">
             使用額の内訳
@@ -14,6 +15,6 @@ export default function Page() {
           </div>
         </CardBody>
       </Card>
-    </div>
+    </FlexContainer>
   );
 }
