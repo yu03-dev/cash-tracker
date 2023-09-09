@@ -10,7 +10,7 @@ import {
 import { HamburgerMenu } from "../../icons/HamburgerMenu";
 import { CloseButton } from "../../icons/CloseButton";
 import { NavList } from "./NavList";
-import { useHeader } from "@/app/hooks/useHeader";
+import { useHeader } from "@/app/hooks/useNavigation";
 import { useAuth } from "@/app/hooks/useAuth";
 
 export function Header() {
