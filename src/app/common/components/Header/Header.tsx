@@ -10,11 +10,11 @@ import {
 import { HamburgerMenu } from "../../icons/HamburgerMenu";
 import { CloseButton } from "../../icons/CloseButton";
 import { NavList } from "./NavList";
-import { useHeader } from "@/app/hooks/useNavigation";
+import { useNavigation } from "@/app/hooks/useNavigation";
 import { useAuth } from "@/app/hooks/useAuth";
 
 export function Header() {
-  const { openNav, handleNav } = useHeader();
+  const { openNav, handleNav } = useNavigation();
   const { handleSignOut } = useAuth();
 
   return (
@@ -49,7 +49,7 @@ export function Header() {
       </div>
       <Collapse open={openNav}>
         <div className="container mx-auto">
-          <NavList />
+          <NavList onClick={handleNav} />
           <Button
             variant="gradient"
             size="sm"
