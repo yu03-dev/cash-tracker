@@ -1,6 +1,6 @@
 import { db } from "@/firebase/admin";
 import { zPostData } from "@/types";
-import { getUserId } from "@/utils/session";
+import { getUserInformation } from "@/utils/session";
 import { FieldValue } from "firebase-admin/firestore";
 import { NextResponse, type NextRequest } from "next/server";
 
@@ -10,7 +10,7 @@ export const PUT = async (
 ) => {
   const sessionCookie = request.headers.get("Authorization");
   try {
-    const uid = await getUserId(sessionCookie!);
+    const { uid } = await getUserInformation(sessionCookie!);
     const docId = params.id;
     const body = zPostData.parse(await request.json());
     const docRef = db
@@ -36,7 +36,7 @@ export const DELETE = async (
 ) => {
   const sessionCookie = request.headers.get("Authorization");
   try {
-    const uid = await getUserId(sessionCookie!);
+    const { uid } = await getUserInformation(sessionCookie!);
     const docId = params.id;
     const docRef = db
       .collection("users")
