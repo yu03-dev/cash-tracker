@@ -25,10 +25,10 @@ export const RecordList = async () => {
       <table className="w-full min-w-max table-auto text-left">
         <thead>
           <tr>
-            {TABLE_HEAD.map((head) => {
+            {TABLE_HEAD.map((head, index) => {
               return (
                 <th
-                  key={head}
+                  key={index}
                   className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
                 >
                   <Typography

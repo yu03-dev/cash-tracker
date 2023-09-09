@@ -13,7 +13,7 @@ export const ExpensesCard = async () => {
     schema: z.number(),
   });
   return (
-    <Card>
+    <Card className="w-full max-w-screen-md py-2 px-4">
       <CardHeader className="relative" floated={false} shadow={false}>
         <Typography variant="h4">
           <div className="text-lg md:text-xl lg:text-2xl">
