@@ -8,9 +8,11 @@ import {
 } from "@/app/common/lib/material-tailwind";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { NavigationItemList } from "./NavigationItemList";
-import clsx from "clsx";
+import cn from "../../lib/cn";
 
-export const MobileHeader = (props: { hidden?: "sm" | "md" | "lg" }) => {
+type MobileHeaderProps = React.HTMLAttributes<HTMLDivElement>;
+
+export const MobileHeader = ({ className }: MobileHeaderProps) => {
   const [isShowDrawer, setIsShowDrawer] = useState(false);
 
   const openDrawer = () => setIsShowDrawer(true);
@@ -22,16 +24,16 @@ export const MobileHeader = (props: { hidden?: "sm" | "md" | "lg" }) => {
     });
   }, []);
 
-  const rootClassName = clsx(
-    "sticky top-0 z-10",
-    "h-max max-w-full py-2 px-4 lg:px-8 lg:py-4",
-    "rounded-none",
-    props.hidden ? `${props.hidden}:hidden` : ""
-  );
-
   return (
     <>
-      <Navbar className={rootClassName}>
+      <Navbar
+        className={cn(
+          "sticky top-0 z-10",
+          "h-max max-w-full py-2 px-4 lg:px-8 lg:py-4",
+          "rounded-none",
+          className
+        )}
+      >
         <IconButton
           variant="text"
           onClick={openDrawer}

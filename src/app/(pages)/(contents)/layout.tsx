@@ -9,8 +9,8 @@ export default function ContentLayout({
   return (
     <div className="flex flex-col lg:flex-row h-full w-full">
       <div className="w-full h-fit lg:w-fit lg:h-full">
-        <MobileHeader hidden="lg" />
-        <DefaultSidebar show="lg" />
+        <MobileHeader className="lg:hidden" />
+        <DefaultSidebar className="hidden lg:block" />
       </div>
       {children}
     </div>
