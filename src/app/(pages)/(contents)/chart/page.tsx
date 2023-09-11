@@ -1,10 +1,9 @@
-import { MyChart } from "@/app/(pages)/chart/components";
-import { FlexContainer } from "@/app/common/components/FlexContainer";
+import { MyChart } from "@/app/(pages)/(contents)/chart/components";
 import { Card, CardBody, Typography } from "@/app/common/lib/material-tailwind";
 
 export default function Page() {
   return (
-    <FlexContainer>
+    <div className="w-full h-full flex flex-col gap-y-6 items-center px-1 py-8 sm:px-4 md:px-8 md:py-12 lg:px-12">
       <Card className="w-96 rounded-xl">
         <CardBody>
           <Typography variant="h4" color="blue-gray" className="mb-2 underline">
@@ -15,6 +14,6 @@ export default function Page() {
           </div>
         </CardBody>
       </Card>
-    </FlexContainer>
+    </div>
   );
 }

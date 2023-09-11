@@ -2,7 +2,6 @@
 import { RecordType } from "@/types";
 import { Typography } from "@/app/common/lib/material-tailwind";
 import { TimeConverter } from "@/utils/time_converter";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { isNotExpense } from "@/utils/expense";
 import {
   Popover,
@@ -12,12 +11,13 @@ import {
 import React, { useEffect, useState } from "react";
 import { UpdateFormDialog } from "./UpdateFormDialog";
 import { DeleteDialog } from "./DeleteDialog";
+import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
 
 const MoreVertPopdown = ({ children }: { children: React.ReactNode }) => {
   return (
     <Popover placement="bottom-end">
       <PopoverHandler>
-        <MoreVertIcon />
+        <EllipsisVerticalIcon className="h-6 w-6 cursor-pointer" />
       </PopoverHandler>
       <PopoverContent className="w-20 flex flex-col items-center">
         {children}
@@ -86,7 +86,7 @@ export const Record = ({
           </Typography>
         </td>
         <td className={classes}>
-          <div className="text-right">
+          <div className="flex justify-end">
             <MoreVertPopdown>
               <Typography
                 onClick={handleOpenUpdateDialog}

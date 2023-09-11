@@ -24,7 +24,7 @@ export const ExpensesCard = async () => {
       <CardBody className="flex justify-center">
         {total >= 0 ? (
           <Typography variant="h4" color="blue-gray">
-            <div className="text-5xl md:text-6xl lg:text-7xl">{`¥ ${total}`}</div>
+            <div className="text-4xl md:text-5xl lg:text-6xl">{`¥ ${total}`}</div>
           </Typography>
         ) : (
           <Typography variant="h4" color="red">

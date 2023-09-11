@@ -21,9 +21,9 @@ export const RecordList = async () => {
       </Typography>
     );
   return (
-    <Card className="w-full h-full overflow-y-scroll">
+    <Card className="w-full max-w-screen-lg h-fit overflow-y-scroll">
       <table className="w-full min-w-max table-auto text-left">
-        <thead>
+        <thead className="sticky top-0">
           <tr>
             {TABLE_HEAD.map((head, index) => {
               return (
