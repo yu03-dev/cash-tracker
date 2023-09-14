@@ -11,8 +11,7 @@ import {
 import { useRouter } from "next/navigation";
 import React, { useCallback } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { FormContainer } from "@/app/common/components/FormContainer";
-import { FormInput } from "@/app/common/components/FormInput";
+import { InputWrapper } from "@/app/common/components/InputWrapper";
 
 type FormInputsType = {
   price: string;
@@ -53,7 +52,10 @@ export const PostForm = () => {
       <Typography color="gray" className="mt-1 font-normal">
         出費、または支給された金額を入力してください
       </Typography>
-      <FormContainer onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="mt-8 w-full flex flex-col gap-6"
+      >
         <Controller
           control={control}
           name="price"
@@ -69,7 +71,7 @@ export const PostForm = () => {
             },
           }}
           render={({ field }) => (
-            <FormInput>
+            <InputWrapper error={errors.price}>
               <Input
                 size="lg"
                 label="金額（必須）"
@@ -78,10 +80,7 @@ export const PostForm = () => {
                 onBlur={field.onBlur}
                 error={errors.price?.message !== undefined}
               />
-              <Typography variant="paragraph" color="red">
-                {errors.price?.message ? `※${errors.price?.message}` : ""}
-              </Typography>
-            </FormInput>
+            </InputWrapper>
           )}
         />
         <Controller
@@ -89,7 +88,7 @@ export const PostForm = () => {
           name="category"
           rules={{ required: "必須項目です" }}
           render={({ field }) => (
-            <FormInput>
+            <InputWrapper error={errors.category}>
               <Select
                 size="lg"
                 label="カテゴリ（必須）"
@@ -103,16 +102,13 @@ export const PostForm = () => {
                 <Option value="交通費">(-)交通費</Option>
                 <Option value="その他">(-)その他</Option>
               </Select>
-              <Typography variant="paragraph" color="red">
-                {errors.category?.message ? `※${errors.category?.message}` : ""}
-              </Typography>
-            </FormInput>
+            </InputWrapper>
           )}
         />
         <Button fullWidth type="submit" color={isValid ? "light-blue" : "teal"}>
           Add
         </Button>
-      </FormContainer>
+      </form>
     </Card>
   );
 };

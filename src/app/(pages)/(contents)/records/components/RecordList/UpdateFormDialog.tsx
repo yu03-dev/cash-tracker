@@ -12,8 +12,7 @@ import {
   Typography,
 } from "@/app/common/lib/material-tailwind";
 import { Controller, useForm } from "react-hook-form";
-import { FormContainer } from "@/app/common/components/FormContainer";
-import { FormInput } from "@/app/common/components/FormInput";
+import { InputWrapper } from "@/app/common/components/InputWrapper";
 import { updateRecord } from "@/app/store/api/client/records";
 import { useRouter } from "next/navigation";
 
@@ -83,7 +82,10 @@ export const UpdateFormDialog = (props: UpdateFormDialogProps) => {
         <Typography color="gray" className="font-normal">
           出費、または支給された金額を入力してください
         </Typography>
-        <FormContainer onSubmit={handleSubmit(onSubmit)}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="mt-8 w-full flex flex-col gap-6"
+        >
           <Controller
             control={control}
             name="price"
@@ -99,7 +101,7 @@ export const UpdateFormDialog = (props: UpdateFormDialogProps) => {
               },
             }}
             render={({ field }) => (
-              <FormInput>
+              <InputWrapper error={errors.price}>
                 <Input
                   size="lg"
                   label="金額（必須）"
@@ -108,10 +110,7 @@ export const UpdateFormDialog = (props: UpdateFormDialogProps) => {
                   onBlur={field.onBlur}
                   error={errors.price?.message !== undefined}
                 />
-                <Typography variant="paragraph" color="red">
-                  {errors.price?.message ? `※${errors.price?.message}` : ""}
-                </Typography>
-              </FormInput>
+              </InputWrapper>
             )}
           />
           <Controller
@@ -119,7 +118,7 @@ export const UpdateFormDialog = (props: UpdateFormDialogProps) => {
             name="category"
             rules={{ required: "必須項目です" }}
             render={({ field }) => (
-              <FormInput>
+              <InputWrapper error={errors.category}>
                 <Select
                   size="lg"
                   label="カテゴリ（必須）"
@@ -133,12 +132,7 @@ export const UpdateFormDialog = (props: UpdateFormDialogProps) => {
                   <Option value="交通費">(-)交通費</Option>
                   <Option value="その他">(-)その他</Option>
                 </Select>
-                <Typography variant="paragraph" color="red">
-                  {errors.category?.message
-                    ? `※${errors.category?.message}`
-                    : ""}
-                </Typography>
-              </FormInput>
+              </InputWrapper>
             )}
           />
           <Button
@@ -148,7 +142,7 @@ export const UpdateFormDialog = (props: UpdateFormDialogProps) => {
           >
             update
           </Button>
-        </FormContainer>
+        </form>
       </DialogBody>
       <DialogFooter>
         <Button variant="text" color="blue-gray" onClick={handler}>
