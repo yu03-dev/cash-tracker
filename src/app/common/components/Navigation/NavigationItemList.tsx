@@ -22,7 +22,7 @@ type NavType = {
 };
 
 export const NavigationItemList = () => {
-  const { handleSignOut } = useAuth();
+  const { logout } = useAuth();
 
   const navItems: NavType[] = [
     {
@@ -44,7 +44,7 @@ export const NavigationItemList = () => {
       title: "Log out",
       href: "/",
       element: <ArrowLeftOnRectangleIcon className="h-5 w-5" />,
-      onClick: handleSignOut,
+      onClick: () => logout(),
     },
   ];
 
