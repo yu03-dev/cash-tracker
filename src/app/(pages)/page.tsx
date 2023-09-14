@@ -48,13 +48,16 @@ export default function Home() {
           </Card>
         </div>
         <div className="flex flex-col items-center mt-16 lg:mt-32">
-          <Button
-            color="blue"
-            size="lg"
-            className="w-full max-w-lg hover:bg-blue-600 duration-300 mb-4"
-          >
-            Sign up
-          </Button>
+          <Link href="signup" className="w-full flex justify-center">
+            <Button
+              color="blue"
+              size="lg"
+              className="h-fit max-w-lg hover:bg-blue-600 duration-300 mb-4"
+              fullWidth
+            >
+              Sign up
+            </Button>
+          </Link>
           <Typography className="text-center">
             If you already have your account,
             <br />
