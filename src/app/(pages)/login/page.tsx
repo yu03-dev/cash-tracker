@@ -27,7 +27,6 @@ export default function Page() {
   const {
     formState: { errors, isValid },
     handleSubmit,
-    reset,
     control,
   } = useForm<FormInputsType>({
     mode: "onChange",
@@ -42,16 +41,23 @@ export default function Page() {
 
   const onSubmit = useCallback(
     async (data: FormInputsType) => {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        data.email,
-        data.password
-      );
-      const idToken = await userCredential.user.getIdToken();
-      await login(idToken);
-      reset();
+      try {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          data.email,
+          data.password
+        );
+        const idToken = await userCredential.user.getIdToken();
+        await login(idToken);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error(error.message);
+        } else {
+          console.error(error);
+        }
+      }
     },
-    [login, reset]
+    [login]
   );
 
   return (
