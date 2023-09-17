@@ -1,5 +1,4 @@
-import { MobileHeader } from "@/app/common/components/Navigation/MobileHeader";
-import { DefaultSidebar } from "@/app/common/components/Navigation/SideBar";
+import { Sidebar, NavigationHeader } from "@/app/common/components/Navigation/";
 
 export default function ContentLayout({
   children,
@@ -7,11 +6,9 @@ export default function ContentLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col lg:flex-row h-full w-full">
-      <div className="w-full h-fit lg:w-fit lg:h-full">
-        <MobileHeader className="lg:hidden" />
-        <DefaultSidebar className="hidden lg:block" />
-      </div>
+    <div className="flex flex-col w-full md:flex-row md:h-full">
+      <Sidebar />
+      <NavigationHeader />
       {children}
     </div>
   );
