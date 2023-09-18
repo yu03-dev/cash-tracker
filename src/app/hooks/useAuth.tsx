@@ -23,7 +23,7 @@ export const useAuth = () => {
       }
       const { message } = zMessageResponse.parse(await response.json());
       console.log(message);
-      router.push("/records");
+      router.push("/dashboard");
     },
     [router]
   );
