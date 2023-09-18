@@ -1,7 +1,7 @@
 import { ChartDataType, RecordsType } from "@/types";
 import { isNotExpense } from "@/utils/expense";
 import { getRecords } from "@/utils/firestore_query";
-import { getUserInformation } from "@/utils/session";
+import { getUser } from "@/utils/session";
 import { NextResponse, type NextRequest } from "next/server";
 
 const reduceByCategory = (records: RecordsType) => {
@@ -29,7 +29,7 @@ const reduceByCategory = (records: RecordsType) => {
 export const GET = async (request: NextRequest) => {
   const sessionCookie = request.headers.get("Authorization");
   try {
-    const { uid } = await getUserInformation(sessionCookie!);
+    const { uid } = await getUser(sessionCookie!);
     const records = await getRecords(uid);
     const chartData = reduceByCategory(records);
     return NextResponse.json(chartData);
