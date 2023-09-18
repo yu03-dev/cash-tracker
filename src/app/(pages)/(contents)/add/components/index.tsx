@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import React, { useCallback } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { InputWrapper } from "@/app/common/components/InputWrapper";
+import { NotExpenseCategory, categoryList } from "@/constant";
 
 type FormInputsType = {
   price: string;
@@ -97,10 +98,13 @@ export const PostForm = () => {
                 onBlur={field.onBlur}
                 error={errors.category?.message !== undefined}
               >
-                <Option value="支給">(+)支給</Option>
-                <Option value="食費">(-)食費</Option>
-                <Option value="交通費">(-)交通費</Option>
-                <Option value="その他">(-)その他</Option>
+                {categoryList.map((category, index) => (
+                  <Option key={index} value={category}>
+                    {category === NotExpenseCategory
+                      ? `(+)${category}`
+                      : `(-)${category}`}
+                  </Option>
+                ))}
               </Select>
             </InputWrapper>
           )}

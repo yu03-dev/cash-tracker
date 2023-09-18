@@ -58,18 +58,14 @@ export const Record = ({
     <>
       <tr>
         <td className={classes}>
-          <Typography
-            variant="paragraph"
-            color="blue-gray"
-            className="font-normal"
-          >
+          <Typography variant="small" color="blue-gray" className="font-normal">
             <span className="md:hidden">{onlyDate}</span>
             <span className="hidden md:block">{timeStamp}</span>
           </Typography>
         </td>
         <td className={classes}>
           <Typography
-            variant="paragraph"
+            variant="small"
             color={isIncome ? "green" : "blue-gray"}
             className="font-normal w-full"
           >
@@ -78,7 +74,7 @@ export const Record = ({
         </td>
         <td className={classes}>
           <Typography
-            variant="paragraph"
+            variant="small"
             color="blue-gray"
             className="font-normal w-full"
           >

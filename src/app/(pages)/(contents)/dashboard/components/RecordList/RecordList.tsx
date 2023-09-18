@@ -1,11 +1,15 @@
+import cn from "@/app/common/lib/cn";
 import { Record } from "./Record";
 import { Card, Typography } from "@/app/common/lib/material-tailwind";
 import { fetchData } from "@/app/store/api/server/fetchData";
 import { RecordsType, zRecords } from "@/types";
+import { HTMLAttributes } from "react";
 
 const TABLE_HEAD = ["Date", "Price", "Category", ""];
 
-export const RecordList = async () => {
+export const RecordList = async ({
+  className,
+}: HTMLAttributes<HTMLDivElement>) => {
   const records = await fetchData<RecordsType>({
     uri: "/api/user/records",
     schema: zRecords,
@@ -21,7 +25,7 @@ export const RecordList = async () => {
       </Typography>
     );
   return (
-    <Card className="w-full max-w-screen-lg h-fit overflow-y-scroll">
+    <Card className={cn(className)}>
       <table className="w-full min-w-max table-auto text-left">
         <thead className="sticky top-0">
           <tr>
@@ -32,9 +36,8 @@ export const RecordList = async () => {
                   className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
                 >
                   <Typography
-                    variant="small"
                     color="blue-gray"
-                    className="font-normal leading-none opacity-70"
+                    className="font-bold leading-none opacity-70"
                   >
                     {head}
                   </Typography>
@@ -46,7 +49,7 @@ export const RecordList = async () => {
         <tbody>
           {records.map((record, index) => {
             const isLast = index === records.length - 1;
-            const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+            const classes = isLast ? "p-3" : "p-3 border-b border-blue-gray-50";
 
             return <Record key={record.id} record={record} classes={classes} />;
           })}

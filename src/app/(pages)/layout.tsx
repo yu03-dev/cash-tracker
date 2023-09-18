@@ -19,10 +19,8 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={cn(inter.className, "h-screen")}>
-        <div className="h-full">
-          <Header />
-          {children}
-        </div>
+        <Header />
+        {children}
       </body>
     </html>
   );
