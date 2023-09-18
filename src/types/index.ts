@@ -20,11 +20,12 @@ export const zRecord = z.object({
 
 export const zRecords = z.array(zRecord);
 
-export const zChartData = z.object({
-  expensesTotal: z.number(),
-  categories: z.array(z.string()),
-  expenses: z.array(z.number()),
-});
+export const zExpenseByCategory = z.array(
+  z.object({
+    category: z.string(),
+    value: z.number(),
+  })
+);
 
 export const zProfileData = z.object({
   name: z.string(),
@@ -45,6 +46,6 @@ export type PostDataType = z.infer<typeof zPostData>;
 export type SecondsType = z.infer<typeof zSeconds>;
 export type RecordType = z.infer<typeof zRecord>;
 export type RecordsType = z.infer<typeof zRecords>;
-export type ChartDataType = z.infer<typeof zChartData>;
+export type ExpenseByCategoryType = z.infer<typeof zExpenseByCategory>;
 export type ProfileDataType = z.infer<typeof zProfileData>;
 export type MessageRessponseType = z.infer<typeof zMessageResponse>;

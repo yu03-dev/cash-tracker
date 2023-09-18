@@ -1,20 +1,14 @@
-import { db } from "@/firebase/admin";
-import { getUserInformation } from "@/utils/session";
+import { getUser } from "@/utils/session";
 import { NextResponse, type NextRequest } from "next/server";
 
 export const GET = async (request: NextRequest) => {
   const sessionCookie = request.headers.get("Authorization");
   try {
-    const { uid, name, email, picture } = await getUserInformation(
-      sessionCookie!
-    );
-    const userDocRef = db.collection("users").doc(uid);
-    const userDocSnap = await userDocRef.get();
+    const { name, email, picture } = await getUser(sessionCookie!);
     return NextResponse.json({
       name,
       picture,
       email,
-      ...userDocSnap.data(),
     });
   } catch (error) {
     console.error(error);

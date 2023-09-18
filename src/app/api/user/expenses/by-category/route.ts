@@ -1,27 +1,24 @@
-import { ChartDataType, RecordsType } from "@/types";
-import { isNotExpense } from "@/utils/expense";
+import { ExpenseByCategoryType, RecordsType } from "@/types";
 import { getRecords } from "@/utils/firestore_query";
-import { getUserInformation } from "@/utils/session";
+import { getUser } from "@/utils/session";
 import { NextResponse, type NextRequest } from "next/server";
 
 const reduceByCategory = (records: RecordsType) => {
   const chartData = records.reduce(
-    (accumulator: ChartDataType, record) => {
+    (accumulator: ExpenseByCategoryType, record) => {
       const { price, category } = record;
-      if (isNotExpense(category)) return accumulator;
-      accumulator.expensesTotal += price;
-      const categoryIndex = accumulator.categories.findIndex(
-        (item) => item === category
-      );
-      if (categoryIndex >= 0) {
-        accumulator.expenses[categoryIndex] += price;
+      const index = accumulator.findIndex((item) => item.category === category);
+      if (index >= 0) {
+        accumulator[index].value += price;
       } else {
-        accumulator.categories.push(category);
-        accumulator.expenses.push(price);
+        accumulator.push({
+          category,
+          value: price,
+        });
       }
       return accumulator;
     },
-    { expensesTotal: 0, categories: [], expenses: [] }
+    []
   );
   return chartData;
 };
@@ -29,7 +26,7 @@ const reduceByCategory = (records: RecordsType) => {
 export const GET = async (request: NextRequest) => {
   const sessionCookie = request.headers.get("Authorization");
   try {
-    const { uid } = await getUserInformation(sessionCookie!);
+    const { uid } = await getUser(sessionCookie!);
     const records = await getRecords(uid);
     const chartData = reduceByCategory(records);
     return NextResponse.json(chartData);
