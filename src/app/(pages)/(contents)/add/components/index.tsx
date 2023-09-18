@@ -39,7 +39,7 @@ export const PostForm = () => {
       };
       await createRecord(submitData);
       reset();
-      router.push("/records");
+      router.push("/dashboard");
       router.refresh();
     },
     [reset, router]
