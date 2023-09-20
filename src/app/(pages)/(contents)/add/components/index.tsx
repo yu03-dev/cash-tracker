@@ -9,10 +9,11 @@ import {
   Typography,
 } from "@/app/common/lib/material-tailwind";
 import { useRouter } from "next/navigation";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { InputWrapper } from "@/app/common/components/InputWrapper";
 import { NotExpenseCategory, categoryList } from "@/constant";
+import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
 
 type FormInputsType = {
   price: string;
@@ -21,6 +22,7 @@ type FormInputsType = {
 
 export const PostForm = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const {
     formState: { errors, isValid },
     handleSubmit,
@@ -37,13 +39,17 @@ export const PostForm = () => {
         price: parseInt(data.price),
         category: data.category,
       };
+      setIsLoading(true);
       await createRecord(submitData);
+      setIsLoading(false);
       reset();
       router.push("/dashboard");
       router.refresh();
     },
     [reset, router]
   );
+
+  useMutateSnackbar({ actionText: "追加", loading: isLoading });
 
   return (
     <Card color="transparent" shadow={false} className="w-80 sm:w-96">
