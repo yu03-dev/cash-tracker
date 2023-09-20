@@ -1,6 +1,6 @@
 import { useSetAtom } from "jotai";
 import { useEffect, useRef } from "react";
-import { snackbarState } from "../store/ui/snackbar";
+import { snackbarState } from "../store/snackbar";
 
 type UseMutateSnackbarProps = {
   actionText: string;

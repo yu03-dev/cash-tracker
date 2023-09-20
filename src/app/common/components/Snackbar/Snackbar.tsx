@@ -1,6 +1,6 @@
 "use client";
 import { Alert, Spinner, Typography } from "@/app/common/lib/material-tailwind";
-import { snackbarState } from "@/app/store/ui/snackbar";
+import { snackbarState } from "@/app/store/snackbar";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import { useAtom } from "jotai";
 import React, { useEffect } from "react";
