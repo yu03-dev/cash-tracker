@@ -7,8 +7,9 @@ import {
   DialogFooter,
   Typography,
 } from "@/app/common/lib/material-tailwind";
-import { deleteRecord } from "@/app/store/api/client/records";
+import { useRecord } from "@/app/hooks/useRecords";
 import { useRouter } from "next/navigation";
+import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
 
 type DeleteDialogProps = {
   isOpen: boolean;
@@ -17,14 +18,17 @@ type DeleteDialogProps = {
 };
 
 export function DeleteDialog(props: DeleteDialogProps) {
+  const { isLoading, deleteRecord } = useRecord();
   const { isOpen, handleOpen, recordId } = props;
   const router = useRouter();
 
   const handleDelete = useCallback(async () => {
-    await deleteRecord({ recordId });
     handleOpen();
+    await deleteRecord({ recordId });
     router.refresh();
-  }, [recordId, handleOpen, router]);
+  }, [handleOpen, recordId, router, deleteRecord]);
+
+  useMutateSnackbar({ actionText: "削除", loading: isLoading });
 
   return (
     <Dialog size="md" open={isOpen} handler={handleOpen}>

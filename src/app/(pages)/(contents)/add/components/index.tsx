@@ -1,5 +1,5 @@
 "use client";
-import { createRecord } from "@/app/store/api/client/records";
+import { useRecord } from "@/app/hooks/useRecords";
 import {
   Button,
   Card,
@@ -22,7 +22,7 @@ type FormInputsType = {
 
 export const PostForm = () => {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { isLoading, createRecord } = useRecord();
   const {
     formState: { errors, isValid },
     handleSubmit,
@@ -39,14 +39,12 @@ export const PostForm = () => {
         price: parseInt(data.price),
         category: data.category,
       };
-      setIsLoading(true);
       await createRecord(submitData);
-      setIsLoading(false);
       reset();
       router.push("/dashboard");
       router.refresh();
     },
-    [reset, router]
+    [reset, router, createRecord]
   );
 
   useMutateSnackbar({ actionText: "追加", loading: isLoading });
