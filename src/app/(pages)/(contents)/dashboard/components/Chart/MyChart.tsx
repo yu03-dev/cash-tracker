@@ -1,7 +1,7 @@
 import cn from "@/app/common/lib/cn";
 import { DoughnutChart } from "./DoughnutChart";
 import { Card, Typography } from "@/app/common/lib/material-tailwind";
-import { fetchData } from "@/app/store/api/server/fetchData";
+import { fetchData } from "@/utils/fetchData";
 import { ExpenseByCategoryType, zExpenseByCategory } from "@/types";
 import { HTMLAttributes } from "react";
 
