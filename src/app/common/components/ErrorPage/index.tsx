@@ -6,7 +6,7 @@ type ErrorProps = {
   reset: () => void;
 };
 
-export const BoxError = (props: ErrorProps) => {
+export const ErrorPage = (props: ErrorProps) => {
   const { message, reset } = props;
   return (
     <div className="container mx-auto px-8 py-8">

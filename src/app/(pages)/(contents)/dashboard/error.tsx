@@ -1,6 +1,6 @@
 "use client";
 
-import { BoxError } from "@/app/common/components/BoxError";
+import { ErrorPage } from "@/app/common/components/ErrorPage";
 import { useEffect } from "react";
 
 export default function Error({
@@ -14,5 +14,5 @@ export default function Error({
     console.error(error);
   }, [error]);
 
-  return <BoxError message={error.message} reset={reset} />;
+  return <ErrorPage message={error.message} reset={reset} />;
 }
