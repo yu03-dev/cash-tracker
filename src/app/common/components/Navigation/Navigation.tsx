@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/app/hooks/useAuth";
 import {
@@ -20,10 +20,18 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/solid";
 import { useGetProfile } from "@/app/hooks/useGetProfile";
+import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
+import { useRouter } from "next/navigation";
 
 const NavigationItemList = () => {
-  const { logout } = useAuth();
+  const router = useRouter();
+  const { isLoading, logout } = useAuth();
   const { name, picture, email } = useGetProfile();
+
+  const handleLogout = useCallback(async () => {
+    await logout();
+    router.push("/");
+  }, [logout, router]);
 
   const navItems = [
     {
@@ -36,13 +44,13 @@ const NavigationItemList = () => {
       href: "/add",
       element: <PlusCircleIcon className="h-5 w-5" />,
     },
-    {
-      title: "Log out",
-      href: "/",
-      element: <ArrowLeftOnRectangleIcon className="h-5 w-5" />,
-      onClick: () => logout(),
-    },
   ];
+
+  useMutateSnackbar({
+    loadingText: "ログアウトしています",
+    completeText: "ログアウトしました",
+    loading: isLoading,
+  });
 
   return (
     <>
@@ -58,9 +66,9 @@ const NavigationItemList = () => {
         </div>
       </div>
       <List>
-        {navItems.map(({ title, element, href, onClick }, index) => {
+        {navItems.map(({ title, element, href }, index) => {
           return (
-            <Link href={href} onClick={onClick} key={index}>
+            <Link href={href} key={index}>
               <ListItem className="hover:bg-gray-300">
                 <ListItemPrefix>{element}</ListItemPrefix>
                 <Typography
@@ -74,6 +82,14 @@ const NavigationItemList = () => {
             </Link>
           );
         })}
+        <ListItem className="hover:bg-gray-300" onClick={handleLogout}>
+          <ListItemPrefix>
+            <ArrowLeftOnRectangleIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          <Typography variant="h5" color="blue-gray" className="font-normal">
+            Log out
+          </Typography>
+        </ListItem>
       </List>
     </>
   );

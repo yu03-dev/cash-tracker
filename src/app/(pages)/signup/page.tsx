@@ -7,11 +7,13 @@ import {
   Typography,
 } from "@/app/common/lib/material-tailwind";
 import { useAuth } from "@/app/hooks/useAuth";
+import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
 import { auth, provider } from "@/firebase/client";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
@@ -22,7 +24,8 @@ type FormInputsType = {
 };
 
 export default function Page() {
-  const { login } = useAuth();
+  const router = useRouter();
+  const { isLoading, login } = useAuth();
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowRePassword, setIsShowRePassword] = useState(false);
 
@@ -36,12 +39,21 @@ export default function Page() {
     defaultValues: { email: "", password: "", repassword: "" },
   });
 
+  useMutateSnackbar({
+    loadingText: "ログインしています",
+    completeText: "ログインしました",
+    loading: isLoading,
+  });
+
+  // Googleアカウントでログイン
   const handleSignInWithGoggle = useCallback(async () => {
     const userCredential = await signInWithPopup(auth, provider);
     const idToken = await userCredential.user.getIdToken();
     await login(idToken);
-  }, [login]);
+    router.push("/dashboard");
+  }, [login, router]);
 
+  // メール&パスワードでログイン
   const onSubmit = useCallback(
     async (data: FormInputsType) => {
       try {
@@ -52,6 +64,7 @@ export default function Page() {
         );
         const idToken = await userCredential.user.getIdToken();
         await login(idToken);
+        router.push("/dashboard");
       } catch (error) {
         if (error instanceof Error) {
           console.error(error.message);
@@ -60,7 +73,7 @@ export default function Page() {
         }
       }
     },
-    [login]
+    [login, router]
   );
 
   return (
