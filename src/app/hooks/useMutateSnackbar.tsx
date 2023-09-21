@@ -3,11 +3,13 @@ import { useEffect, useRef } from "react";
 import { snackbarState } from "../store/snackbar";
 
 type UseMutateSnackbarProps = {
-  actionText: string;
+  loadingText: string;
+  completeText: string;
   loading: boolean;
 };
 export const useMutateSnackbar = ({
-  actionText = "追加",
+  loadingText,
+  completeText,
   loading = false,
 }: UseMutateSnackbarProps) => {
   const setActiveSnackbar = useSetAtom(snackbarState);
@@ -16,7 +18,7 @@ export const useMutateSnackbar = ({
   useEffect(() => {
     setActiveSnackbar({
       isOpen: loading,
-      message: `データを${actionText}しています`,
+      message: loadingText,
       loading,
       isError: false,
     });
@@ -24,12 +26,12 @@ export const useMutateSnackbar = ({
     if (prevIsLoadingRef.current != loading && !loading) {
       setActiveSnackbar({
         isOpen: true,
-        message: `データの${actionText}が完了しました`,
+        message: completeText,
         loading,
         isError: false,
       });
     }
 
     prevIsLoadingRef.current = loading;
-  }, [loading, setActiveSnackbar, actionText]);
+  }, [loading, setActiveSnackbar, loadingText, completeText]);
 };

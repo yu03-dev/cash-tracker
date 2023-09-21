@@ -28,7 +28,11 @@ export function DeleteDialog(props: DeleteDialogProps) {
     router.refresh();
   }, [handleOpen, recordId, router, deleteRecord]);
 
-  useMutateSnackbar({ actionText: "削除", loading: isLoading });
+  useMutateSnackbar({
+    loadingText: "データを削除しています",
+    completeText: "データの削除が完了しました",
+    loading: isLoading,
+  });
 
   return (
     <Dialog size="md" open={isOpen} handler={handleOpen}>

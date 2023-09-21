@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@/app/common/lib/material-tailwind";
 import { useRouter } from "next/navigation";
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { InputWrapper } from "@/app/common/components/InputWrapper";
 import { NotExpenseCategory, categoryList } from "@/constant";
@@ -47,7 +47,11 @@ export const PostForm = () => {
     [reset, router, createRecord]
   );
 
-  useMutateSnackbar({ actionText: "追加", loading: isLoading });
+  useMutateSnackbar({
+    loadingText: "データを追加しています",
+    completeText: "データを追加が完了しました",
+    loading: isLoading,
+  });
 
   return (
     <Card color="transparent" shadow={false} className="w-80 sm:w-96">

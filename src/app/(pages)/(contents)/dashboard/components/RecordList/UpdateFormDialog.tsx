@@ -71,7 +71,11 @@ export const UpdateFormDialog = (props: UpdateFormDialogProps) => {
       reset();
     }
   }, [isOpen, reset]);
-  useMutateSnackbar({ actionText: "更新", loading: isLoading });
+  useMutateSnackbar({
+    loadingText: "データを更新しています",
+    completeText: "データの更新が完了しました",
+    loading: isLoading,
+  });
 
   return (
     <Dialog size="md" open={isOpen} handler={handleOpen}>
