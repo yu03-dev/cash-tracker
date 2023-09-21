@@ -32,6 +32,6 @@ export const GET = async (request: NextRequest) => {
     return NextResponse.json(chartData);
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.redirect(new URL("/", request.url));
   }
 };

@@ -12,6 +12,6 @@ export const GET = async (request: NextRequest) => {
     });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.redirect(new URL("/", request.url));
   }
 };

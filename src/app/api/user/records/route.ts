@@ -12,7 +12,7 @@ export const GET = async (request: NextRequest) => {
     const orderedRecords = await getOrderedRecords(uid);
     return NextResponse.json(orderedRecords);
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.redirect(new URL("/", request.url));
   }
 };
 
@@ -31,6 +31,6 @@ export const POST = async (request: NextRequest) => {
       message: "New record is successfully posted!",
     });
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.redirect(new URL("/", request.url));
   }
 };
