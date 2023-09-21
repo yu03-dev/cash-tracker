@@ -8,9 +8,11 @@ import {
 } from "@/app/common/lib/material-tailwind";
 import { useAuth } from "@/app/hooks/useAuth";
 import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
+import { snackbarState } from "@/app/store/snackbar";
 import { auth, provider } from "@/firebase/client";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { useSetAtom } from "jotai";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -26,6 +28,7 @@ export default function Page() {
   const router = useRouter();
   const { isLoading, login } = useAuth();
   const [isShowPassword, setIsShowPassword] = useState(false);
+  const setActiveSnackbar = useSetAtom(snackbarState);
 
   const {
     formState: { errors, isValid },
@@ -61,6 +64,12 @@ export default function Page() {
         await login(idToken);
         router.push("/dashboard");
       } catch (error) {
+        setActiveSnackbar({
+          isOpen: true,
+          message: "ログインに失敗しました",
+          loading: false,
+          isError: true,
+        });
         if (error instanceof Error) {
           console.error(error.message);
         } else {
@@ -68,7 +77,7 @@ export default function Page() {
         }
       }
     },
-    [login, router]
+    [setActiveSnackbar, login, router]
   );
 
   return (
