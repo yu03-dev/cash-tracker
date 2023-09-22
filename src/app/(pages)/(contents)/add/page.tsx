@@ -1,4 +1,4 @@
-import { PostForm } from "@/app/(pages)/(contents)/add/components";
+import { PostForm } from "@/app/(pages)/(contents)/add/components/PostForm";
 
 export default function Page() {
   return (

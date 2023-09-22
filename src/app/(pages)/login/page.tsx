@@ -7,11 +7,15 @@ import {
   Typography,
 } from "@/app/common/lib/material-tailwind";
 import { useAuth } from "@/app/hooks/useAuth";
+import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
+import { snackbarState } from "@/app/store/snackbar";
 import { auth, provider } from "@/firebase/client";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { useSetAtom } from "jotai";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
@@ -21,8 +25,10 @@ type FormInputsType = {
 };
 
 export default function Page() {
-  const { login } = useAuth();
+  const router = useRouter();
+  const { isLoading, login } = useAuth();
   const [isShowPassword, setIsShowPassword] = useState(false);
+  const setActiveSnackbar = useSetAtom(snackbarState);
 
   const {
     formState: { errors, isValid },
@@ -33,11 +39,18 @@ export default function Page() {
     defaultValues: { email: "", password: "" },
   });
 
+  useMutateSnackbar({
+    loadingText: "ログインしています",
+    completeText: "ログインしました",
+    loading: isLoading,
+  });
+
   const handleSignInWithGoggle = useCallback(async () => {
     const userCredential = await signInWithPopup(auth, provider);
     const idToken = await userCredential.user.getIdToken();
     await login(idToken);
-  }, [login]);
+    router.push("/dashboard");
+  }, [login, router]);
 
   const onSubmit = useCallback(
     async (data: FormInputsType) => {
@@ -49,7 +62,14 @@ export default function Page() {
         );
         const idToken = await userCredential.user.getIdToken();
         await login(idToken);
+        router.push("/dashboard");
       } catch (error) {
+        setActiveSnackbar({
+          isOpen: true,
+          message: "ログインに失敗しました",
+          loading: false,
+          isError: true,
+        });
         if (error instanceof Error) {
           console.error(error.message);
         } else {
@@ -57,7 +77,7 @@ export default function Page() {
         }
       }
     },
-    [login]
+    [setActiveSnackbar, login, router]
   );
 
   return (

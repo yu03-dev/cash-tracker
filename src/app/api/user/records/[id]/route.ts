@@ -26,7 +26,7 @@ export const PUT = async (
       message: "Record is successfully updated!",
     });
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.redirect(new URL("/", request.url));
   }
 };
 
@@ -48,6 +48,6 @@ export const DELETE = async (
       message: "Record is successfully deleted!",
     });
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.redirect(new URL("/", request.url));
   }
 };

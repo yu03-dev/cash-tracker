@@ -1,5 +1,5 @@
 "use client";
-import { createRecord } from "@/app/store/api/client/records";
+import { useRecord } from "@/app/hooks/useRecords";
 import {
   Button,
   Card,
@@ -13,6 +13,7 @@ import React, { useCallback } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { InputWrapper } from "@/app/common/components/InputWrapper";
 import { NotExpenseCategory, categoryList } from "@/constant";
+import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
 
 type FormInputsType = {
   price: string;
@@ -21,6 +22,7 @@ type FormInputsType = {
 
 export const PostForm = () => {
   const router = useRouter();
+  const { isLoading, createRecord } = useRecord();
   const {
     formState: { errors, isValid },
     handleSubmit,
@@ -42,8 +44,14 @@ export const PostForm = () => {
       router.push("/dashboard");
       router.refresh();
     },
-    [reset, router]
+    [reset, router, createRecord]
   );
+
+  useMutateSnackbar({
+    loadingText: "データを追加しています",
+    completeText: "データを追加が完了しました",
+    loading: isLoading,
+  });
 
   return (
     <Card color="transparent" shadow={false} className="w-80 sm:w-96">

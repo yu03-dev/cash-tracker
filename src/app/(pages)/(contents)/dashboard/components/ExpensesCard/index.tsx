@@ -5,7 +5,7 @@ import {
   CardBody,
   Typography,
 } from "@/app/common/lib/material-tailwind";
-import { fetchData } from "@/app/store/api/server/fetchData";
+import { fetchData } from "@/utils/fetchData";
 import { NotExpenseCategory } from "@/constant";
 import { ExpenseByCategoryType, zExpenseByCategory } from "@/types";
 import { HTMLAttributes } from "react";

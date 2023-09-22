@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
 import {
   Button,
@@ -13,8 +13,9 @@ import {
 } from "@/app/common/lib/material-tailwind";
 import { Controller, useForm } from "react-hook-form";
 import { InputWrapper } from "@/app/common/components/InputWrapper";
-import { updateRecord } from "@/app/store/api/client/records";
+import { useRecord } from "@/app/hooks/useRecords";
 import { useRouter } from "next/navigation";
+import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
 
 type UpdateFormDialogProps = {
   isOpen: boolean;
@@ -37,8 +38,8 @@ export const UpdateFormDialog = (props: UpdateFormDialogProps) => {
     handleOpen,
     data: { recordId, currentPrice, currentCategory },
   } = props;
-
   const router = useRouter();
+  const { isLoading, updateRecord } = useRecord();
   const {
     formState: { errors, isValid },
     handleSubmit,
@@ -60,19 +61,24 @@ export const UpdateFormDialog = (props: UpdateFormDialogProps) => {
         category: data.category,
       };
       await updateRecord(submitData);
-      handleOpen();
       router.refresh();
     },
-    [recordId, handleOpen, router]
+    [recordId, router, updateRecord]
   );
 
-  const handler = () => {
-    handleOpen();
-    reset();
-  };
+  useEffect(() => {
+    if (isOpen) {
+      reset();
+    }
+  }, [isOpen, reset]);
+  useMutateSnackbar({
+    loadingText: "データを更新しています",
+    completeText: "データの更新が完了しました",
+    loading: isLoading,
+  });
 
   return (
-    <Dialog size="md" open={isOpen} handler={handler}>
+    <Dialog size="md" open={isOpen} handler={handleOpen}>
       <DialogHeader>
         <Typography variant="h5" color="blue-gray">
           データの更新
@@ -139,13 +145,14 @@ export const UpdateFormDialog = (props: UpdateFormDialogProps) => {
             fullWidth
             type="submit"
             color={isValid ? "light-blue" : "teal"}
+            onClick={handleOpen}
           >
             update
           </Button>
         </form>
       </DialogBody>
       <DialogFooter>
-        <Button variant="text" color="blue-gray" onClick={handler}>
+        <Button variant="text" color="blue-gray" onClick={handleOpen}>
           close
         </Button>
       </DialogFooter>

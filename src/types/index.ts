@@ -28,9 +28,9 @@ export const zExpenseByCategory = z.array(
 );
 
 export const zProfileData = z.object({
-  name: z.string(),
+  name: z.string().optional(),
   picture: z.string().optional(),
-  email: z.string(),
+  email: z.string().optional(),
   comment: z.string().optional(),
 });
 
