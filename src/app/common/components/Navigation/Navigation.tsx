@@ -28,7 +28,6 @@ const NavigationItemList = () => {
   const router = useRouter();
   const { isLoading, logout } = useAuth();
   const { name, picture, email } = useGetProfile();
-  console.log(email);
 
   const handleLogout = useCallback(async () => {
     await logout();
