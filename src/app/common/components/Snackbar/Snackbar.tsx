@@ -33,7 +33,7 @@ export const Snackbar = () => {
         open={activeSnackbar.isOpen}
         onClose={() => setActiveSnackbar(initialSnackbarState)}
         color="gray"
-        className="fixed bottom-8 left-1/2 -translate-x-1/2 z-10 w-96 md:w-80"
+        className="fixed bottom-8 left-1/2 -translate-x-1/2 z-10 w-80 md:w-96"
       >
         <div className="w-full flex justify-between gap-8">
           {activeSnackbar.isError ? (
