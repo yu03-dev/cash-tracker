@@ -8,7 +8,6 @@ import {
   Select,
   Typography,
 } from "@/app/common/lib/material-tailwind";
-import { useRouter } from "next/navigation";
 import React, { useCallback } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { InputWrapper } from "@/app/common/components/InputWrapper";
@@ -21,7 +20,6 @@ type FormInputsType = {
 };
 
 export const PostForm = () => {
-  const router = useRouter();
   const { isLoading, createRecord } = useRecord();
   const {
     formState: { errors, isValid },
@@ -41,10 +39,8 @@ export const PostForm = () => {
       };
       await createRecord(submitData);
       reset();
-      router.push("/dashboard");
-      router.refresh();
     },
-    [reset, router, createRecord]
+    [reset, createRecord]
   );
 
   useMutateSnackbar({
