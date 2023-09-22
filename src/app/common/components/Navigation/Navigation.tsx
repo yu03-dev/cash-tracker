@@ -18,6 +18,7 @@ import {
   PlusCircleIcon,
   Bars3Icon,
   XMarkIcon,
+  UserCircleIcon,
 } from "@heroicons/react/24/solid";
 import { useGetProfile } from "@/app/hooks/useGetProfile";
 import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
@@ -27,6 +28,7 @@ const NavigationItemList = () => {
   const router = useRouter();
   const { isLoading, logout } = useAuth();
   const { name, picture, email } = useGetProfile();
+  console.log(email);
 
   const handleLogout = useCallback(async () => {
     await logout();
@@ -55,10 +57,15 @@ const NavigationItemList = () => {
   return (
     <>
       <div className="flex gap-4 items-center mb-4">
-        <Avatar src={picture} alt="avatar" />
+        {picture ? (
+          <Avatar src={picture} alt="avatar" />
+        ) : (
+          <UserCircleIcon className="h-12 w-12" />
+        )}
+
         <div>
           <Typography variant="h5" color="blue-gray">
-            {name || ""}
+            {name || "NoName"}
           </Typography>
           <Typography variant="small" color="gray">
             {email || ""}
