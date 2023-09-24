@@ -1,6 +1,6 @@
 import { fetchData } from "@/utils/fetchData";
 import { ProfileDataType, zProfileData } from "@/types";
-import { Avatar, Typography } from "@/app/common/lib/material-tailwind";
+import { Avatar, Typography } from "@/app/lib/material-tailwind";
 import React from "react";
 
 export const Profile = async () => {

@@ -1,5 +1,5 @@
 "use client";
-import { Alert, Spinner, Typography } from "@/app/common/lib/material-tailwind";
+import { Alert, Spinner, Typography } from "@/app/lib/material-tailwind";
 import { snackbarState } from "@/app/store/snackbar";
 import {
   CheckCircleIcon,

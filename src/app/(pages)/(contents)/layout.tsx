@@ -1,4 +1,4 @@
-import { Sidebar, NavigationHeader } from "@/app/common/components/Navigation/";
+import { Sidebar, NavigationHeader } from "@/app/components/Navigation";
 
 export default function ContentLayout({
   children,

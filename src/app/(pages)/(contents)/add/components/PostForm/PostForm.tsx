@@ -1,5 +1,4 @@
 "use client";
-import { useRecord } from "@/app/hooks/useRecords";
 import {
   Button,
   Card,
@@ -7,12 +6,14 @@ import {
   Option,
   Select,
   Typography,
-} from "@/app/common/lib/material-tailwind";
+} from "@/app/lib/material-tailwind";
 import React, { useCallback } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { InputWrapper } from "@/app/common/components/InputWrapper";
+import { InputWrapper } from "@/app/components/InputWrapper";
 import { NotExpenseCategory, categoryList } from "@/constant";
 import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
+import { useCreateRecord } from "../../api/createRecord";
+import { useRouter } from "next/navigation";
 
 type FormInputsType = {
   price: string;
@@ -20,7 +21,8 @@ type FormInputsType = {
 };
 
 export const PostForm = () => {
-  const { isLoading, createRecord } = useRecord();
+  const router = useRouter();
+  const { isLoading, createRecord } = useCreateRecord();
   const {
     formState: { errors, isValid },
     handleSubmit,
@@ -39,8 +41,9 @@ export const PostForm = () => {
       };
       await createRecord(submitData);
       reset();
+      router.refresh();
     },
-    [reset, createRecord]
+    [reset, createRecord, router]
   );
 
   useMutateSnackbar({

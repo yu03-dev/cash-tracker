@@ -1,4 +1,4 @@
-import { LoadingIcon } from "@/app/common/components/LoadingIcon";
+import { LoadingIcon } from "@/app/components/LoadingIcon";
 import React from "react";
 
 export default function Loading() {

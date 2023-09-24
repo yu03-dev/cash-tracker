@@ -19,6 +19,7 @@ export const fetchData = async <T>(params: FetchParams<T>) => {
       "Content-Type": "application/json",
       Authorization: sessionCookie,
     },
+    cache: "no-store",
   });
   if (!response.ok) {
     throw new Error(response.statusText);

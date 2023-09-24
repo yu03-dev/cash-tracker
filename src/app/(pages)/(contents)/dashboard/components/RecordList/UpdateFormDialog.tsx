@@ -1,5 +1,4 @@
 import { useCallback, useEffect } from "react";
-
 import {
   Button,
   Dialog,
@@ -10,12 +9,12 @@ import {
   Option,
   Select,
   Typography,
-} from "@/app/common/lib/material-tailwind";
+} from "@/app/lib/material-tailwind";
 import { Controller, useForm } from "react-hook-form";
-import { InputWrapper } from "@/app/common/components/InputWrapper";
-import { useRecord } from "@/app/hooks/useRecords";
+import { InputWrapper } from "@/app/components/InputWrapper";
 import { useRouter } from "next/navigation";
 import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
+import { useUpdateRecord } from "../../api/updateRecord";
 
 type UpdateFormDialogProps = {
   isOpen: boolean;
@@ -39,7 +38,8 @@ export const UpdateFormDialog = (props: UpdateFormDialogProps) => {
     data: { recordId, currentPrice, currentCategory },
   } = props;
   const router = useRouter();
-  const { isLoading, updateRecord } = useRecord();
+  const { isLoading, updateRecord } = useUpdateRecord();
+
   const {
     formState: { errors, isValid },
     handleSubmit,
@@ -71,6 +71,7 @@ export const UpdateFormDialog = (props: UpdateFormDialogProps) => {
       reset();
     }
   }, [isOpen, reset]);
+
   useMutateSnackbar({
     loadingText: "データを更新しています",
     completeText: "データの更新が完了しました",
