@@ -1,22 +1,15 @@
 import cn from "@/app/common/lib/cn";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Typography,
-} from "@/app/common/lib/material-tailwind";
-import { fetchData } from "@/utils/fetchData";
+import { Card, Typography } from "@/app/common/lib/material-tailwind";
 import { NotExpenseCategory } from "@/constant";
-import { ExpenseByCategoryType, zExpenseByCategory } from "@/types";
-import { HTMLAttributes } from "react";
+import { ExpenseByCategoryType } from "@/types";
 
-export const ExpensesCard = async ({
-  className,
-}: HTMLAttributes<HTMLDivElement>) => {
-  const expenseByCategory = await fetchData<ExpenseByCategoryType>({
-    uri: "/api/user/expenses/by-category",
-    schema: zExpenseByCategory,
-  });
+type ExpensesListProps = {
+  expenseByCategory: ExpenseByCategoryType;
+  className: string | undefined;
+};
+
+export const ExpensesList = async (props: ExpensesListProps) => {
+  const { expenseByCategory, className } = props;
 
   const total = expenseByCategory.reduce((accumulator, item) => {
     if (item.category === NotExpenseCategory) {
