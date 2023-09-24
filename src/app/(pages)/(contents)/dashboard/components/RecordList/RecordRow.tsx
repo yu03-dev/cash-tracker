@@ -26,41 +26,30 @@ const MoreVertPopdown = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const Record = ({
+export const RecordRow = ({
   record,
   classes,
 }: {
   record: RecordType;
   classes: string;
 }) => {
-  const [onlyDate, setOnlyDate] = useState<string>("");
-  const [timeStamp, setTimeStamp] = useState<string>("");
+  const { id, price, category, createdAt } = record;
   const [isOpenUpdateDialog, setIsOpenUpdateDialog] = useState<boolean>(false);
   const handleOpenUpdateDialog = () => setIsOpenUpdateDialog((prev) => !prev);
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState<boolean>(false);
   const handleOpenDeleteDialog = () => setIsOpenDeleteDialog((prev) => !prev);
-  const { id, price, category, createdAt } = record;
-  const isIncome = isNotExpense(category);
-  const data = {
-    recordId: id,
-    currentPrice: price,
-    currentCategory: category,
-  };
 
-  useEffect(() => {
-    const date1 = TimeConverter(createdAt, "day");
-    const date2 = TimeConverter(createdAt, "seconds");
-    if (date1) setOnlyDate(date1);
-    if (date2) setTimeStamp(date2);
-  }, [createdAt]);
+  const isIncome = isNotExpense(category);
+  const onlyDate = TimeConverter(createdAt, "day");
+  const timestamp = TimeConverter(createdAt, "seconds");
 
   return (
     <>
       <tr>
         <td className={classes}>
           <Typography variant="small" color="blue-gray" className="font-normal">
-            <span className="md:hidden">{onlyDate}</span>
-            <span className="hidden md:block">{timeStamp}</span>
+            <span className="md:hidden">{onlyDate || ""}</span>
+            <span className="hidden md:block">{timestamp || ""}</span>
           </Typography>
         </td>
         <td className={classes}>
@@ -103,7 +92,11 @@ export const Record = ({
       <UpdateFormDialog
         isOpen={isOpenUpdateDialog}
         handleOpen={handleOpenUpdateDialog}
-        data={data}
+        data={{
+          recordId: id,
+          currentPrice: price,
+          currentCategory: category,
+        }}
       />
       <DeleteDialog
         isOpen={isOpenDeleteDialog}

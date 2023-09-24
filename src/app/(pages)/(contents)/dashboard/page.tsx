@@ -2,27 +2,38 @@ import { fetchData } from "@/utils/fetchData";
 import { Chart } from "./components/Chart";
 import { ExpensesList } from "./components/ExpensesList";
 import { RecordList } from "./components/RecordList";
-import { ExpenseByCategoryType, zExpenseByCategory } from "@/types";
+import {
+  ExpenseByCategoryType,
+  RecordsType,
+  zExpenseByCategory,
+  zRecords,
+} from "@/types";
 
 export default async function Page() {
-  const expenseByCategory = await fetchData<ExpenseByCategoryType>({
+  const expensesDataPromise = fetchData<ExpenseByCategoryType>({
     uri: "/api/user/expenses/by-category",
     schema: zExpenseByCategory,
   });
-  const chartData = await fetchData<ExpenseByCategoryType>({
-    uri: "/api/user/expenses/by-category",
-    schema: zExpenseByCategory,
+  const recordsPromise = fetchData<RecordsType>({
+    uri: "/api/user/records",
+    schema: zRecords,
   });
+
+  const [expensesData, records] = await Promise.all([
+    expensesDataPromise,
+    recordsPromise,
+  ]);
+
   return (
     <div className="w-full h-full flex flex-col gap-y-6 items-center px-1 py-4 sm:px-4 md:px-8 lg:px-12">
       <div className="w-full flex flex-col gap-4 md:flex-row md:justify-center">
         <ExpensesList
-          expenseByCategory={expenseByCategory}
+          expenseByCategory={expensesData}
           className="w-full md:w-96 p-6"
         />
-        <Chart chartData={chartData} className="w-full md:w-96 p-6" />
+        <Chart chartData={expensesData} className="w-full md:w-96 p-6" />
       </div>
-      <RecordList className="w-full overflow-y-scroll" />
+      <RecordList records={records} className="w-full overflow-y-scroll" />
     </div>
   );
 }

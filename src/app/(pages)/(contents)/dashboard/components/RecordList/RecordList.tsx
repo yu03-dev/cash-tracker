@@ -1,19 +1,18 @@
 import cn from "@/app/common/lib/cn";
-import { Record } from "./Record";
+import { RecordRow } from "./RecordRow";
 import { Card, Typography } from "@/app/common/lib/material-tailwind";
-import { fetchData } from "@/utils/fetchData";
-import { RecordsType, zRecords } from "@/types";
-import { HTMLAttributes } from "react";
+import { RecordsType } from "@/types";
 
 const TABLE_HEAD = ["Date", "Price", "Category", ""];
 
-export const RecordList = async ({
-  className,
-}: HTMLAttributes<HTMLDivElement>) => {
-  const records = await fetchData<RecordsType>({
-    uri: "/api/user/records",
-    schema: zRecords,
-  });
+type RecordListProps = {
+  records: RecordsType;
+  className: string | undefined;
+};
+
+export const RecordList = async (props: RecordListProps) => {
+  const { records, className } = props;
+
   if (records.length === 0)
     return (
       <Typography
@@ -24,6 +23,7 @@ export const RecordList = async ({
         記録がありません。
       </Typography>
     );
+
   return (
     <Card className={cn(className)}>
       <table className="w-full min-w-max table-auto text-left">
@@ -51,7 +51,9 @@ export const RecordList = async ({
             const isLast = index === records.length - 1;
             const classes = isLast ? "p-3" : "p-3 border-b border-blue-gray-50";
 
-            return <Record key={record.id} record={record} classes={classes} />;
+            return (
+              <RecordRow key={record.id} record={record} classes={classes} />
+            );
           })}
         </tbody>
       </table>
