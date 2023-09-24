@@ -1,13 +1,13 @@
 "use client";
 import { RecordType } from "@/types";
-import { Typography } from "@/lib/material-tailwind";
+import { Typography } from "@/app/lib/material-tailwind";
 import { TimeConverter } from "@/utils/time_converter";
 import { isNotExpense } from "@/utils/expense";
 import {
   Popover,
   PopoverContent,
   PopoverHandler,
-} from "@/lib/material-tailwind";
+} from "@/app/lib/material-tailwind";
 import React, { useEffect, useState } from "react";
 import { UpdateFormDialog } from "./UpdateFormDialog";
 import { DeleteDialog } from "./DeleteDialog";

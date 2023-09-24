@@ -1,6 +1,6 @@
 "use client";
-import { InputWrapper } from "@/components/InputWrapper";
-import { Card, Input, Button, Typography } from "@/lib/material-tailwind";
+import { InputWrapper } from "@/app/components/InputWrapper";
+import { Card, Input, Button, Typography } from "@/app/lib/material-tailwind";
 import { useLogin } from "@/app/hooks/useLogin";
 import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
 import { snackbarState } from "@/app/store/snackbar";

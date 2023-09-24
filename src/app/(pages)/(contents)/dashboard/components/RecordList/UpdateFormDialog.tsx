@@ -9,9 +9,9 @@ import {
   Option,
   Select,
   Typography,
-} from "@/lib/material-tailwind";
+} from "@/app/lib/material-tailwind";
 import { Controller, useForm } from "react-hook-form";
-import { InputWrapper } from "@/components/InputWrapper";
+import { InputWrapper } from "@/app/components/InputWrapper";
 import { useRouter } from "next/navigation";
 import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
 import { useUpdateRecord } from "../../api/updateRecord";
