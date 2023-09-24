@@ -8,6 +8,7 @@ import {
   zExpenseByCategory,
   zRecords,
 } from "@/types";
+import { Empty } from "@/app/components/Empty";
 
 export default async function Page() {
   const expensesDataPromise = fetchData<ExpenseByCategoryType>({
@@ -23,6 +24,14 @@ export default async function Page() {
     expensesDataPromise,
     recordsPromise,
   ]);
+
+  if (records.length === 0) {
+    return (
+      <div className="w-full h-full flex flex-col gap-y-6 items-center px-1 py-4 sm:px-4 md:px-8 lg:px-12">
+        <Empty />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full h-full flex flex-col gap-y-6 items-center px-1 py-4 sm:px-4 md:px-8 lg:px-12">

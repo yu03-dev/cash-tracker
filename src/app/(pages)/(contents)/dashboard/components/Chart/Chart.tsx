@@ -59,19 +59,6 @@ type ChartProps = {
 export const Chart = async (props: ChartProps) => {
   const { chartData, className } = props;
 
-  // 要修正
-  if (chartData.length === 0) {
-    return (
-      <Typography
-        variant="h3"
-        color="blue-gray"
-        className="flex justify-center mt-4"
-      >
-        記録がありません。
-      </Typography>
-    );
-  }
-
   return (
     <Card className={cn(className)}>
       <ChartContent chartData={chartData} />

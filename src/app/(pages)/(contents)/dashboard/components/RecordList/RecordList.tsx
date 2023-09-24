@@ -13,17 +13,6 @@ type RecordListProps = {
 export const RecordList = async (props: RecordListProps) => {
   const { records, className } = props;
 
-  if (records.length === 0)
-    return (
-      <Typography
-        variant="h3"
-        color="blue-gray"
-        className="flex justify-center"
-      >
-        記録がありません。
-      </Typography>
-    );
-
   return (
     <Card className={cn(className)}>
       <table className="w-full min-w-max table-auto text-left">
