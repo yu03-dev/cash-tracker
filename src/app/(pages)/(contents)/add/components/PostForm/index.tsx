@@ -12,7 +12,7 @@ import { Controller, useForm } from "react-hook-form";
 import { InputWrapper } from "@/app/common/components/InputWrapper";
 import { NotExpenseCategory, categoryList } from "@/constant";
 import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
-import { useCreateRecord } from "../api/createRecord";
+import { useCreateRecord } from "../../api/createRecord";
 import { useRouter } from "next/navigation";
 
 type FormInputsType = {
