@@ -6,7 +6,7 @@ import {
   DialogBody,
   DialogFooter,
   Typography,
-} from "@/app/common/lib/material-tailwind";
+} from "@/lib/material-tailwind";
 import { useRouter } from "next/navigation";
 import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
 import { useDeleteRecord } from "../../api/deleteRecord";

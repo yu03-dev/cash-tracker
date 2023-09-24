@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, Typography } from "@/app/common/lib/material-tailwind";
+import { Button, Card, Typography } from "@/lib/material-tailwind";
 
 type ErrorProps = {
   message: string;

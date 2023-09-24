@@ -1,4 +1,4 @@
-import { Typography } from "@/app/common/lib/material-tailwind";
+import { Typography } from "@/lib/material-tailwind";
 import React from "react";
 import { FieldError } from "react-hook-form";
 

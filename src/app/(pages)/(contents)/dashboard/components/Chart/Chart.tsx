@@ -1,14 +1,9 @@
 "use client";
-import cn from "@/app/common/lib/cn";
-import { Card, Typography } from "@/app/common/lib/material-tailwind";
+import cn from "@/lib/cn";
+import { Card, Typography } from "@/lib/material-tailwind";
 import { ExpenseByCategoryType } from "@/types";
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
-} from "@/app/common/lib/chart.js";
-import { Doughnut } from "@/app/common/lib/react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "@/lib/chart.js";
+import { Doughnut } from "@/lib/react-chartjs-2";
 import { ExpenseCategoryList } from "@/constant";
 
 ChartJS.register(ArcElement, Tooltip, Legend);

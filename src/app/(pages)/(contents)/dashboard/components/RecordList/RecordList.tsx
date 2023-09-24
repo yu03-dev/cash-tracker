@@ -1,6 +1,6 @@
-import cn from "@/app/common/lib/cn";
+import cn from "@/lib/cn";
 import { RecordRow } from "./RecordRow";
-import { Card, Typography } from "@/app/common/lib/material-tailwind";
+import { Card, Typography } from "@/lib/material-tailwind";
 import { RecordsType } from "@/types";
 
 const TABLE_HEAD = ["Date", "Price", "Category", ""];

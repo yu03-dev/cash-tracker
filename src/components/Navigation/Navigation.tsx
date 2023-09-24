@@ -11,7 +11,7 @@ import {
   ListItem,
   ListItemPrefix,
   Typography,
-} from "@/app/common/lib/material-tailwind";
+} from "@/lib/material-tailwind";
 import {
   PresentationChartBarIcon,
   ArrowLeftOnRectangleIcon,

@@ -1,5 +1,5 @@
-import cn from "@/app/common/lib/cn";
-import { Card, Typography } from "@/app/common/lib/material-tailwind";
+import cn from "@/lib/cn";
+import { Card, Typography } from "@/lib/material-tailwind";
 import { NotExpenseCategory } from "@/constant";
 import { ExpenseByCategoryType } from "@/types";
 

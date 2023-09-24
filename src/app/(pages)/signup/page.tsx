@@ -1,11 +1,6 @@
 "use client";
-import { InputWrapper } from "@/app/common/components/InputWrapper";
-import {
-  Card,
-  Input,
-  Button,
-  Typography,
-} from "@/app/common/lib/material-tailwind";
+import { InputWrapper } from "@/components/InputWrapper";
+import { Card, Input, Button, Typography } from "@/lib/material-tailwind";
 import { useAuth } from "@/app/hooks/useAuth";
 import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
 import { auth, provider } from "@/firebase/client";

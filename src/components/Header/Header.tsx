@@ -1,4 +1,4 @@
-import { Typography } from "@/app/common/lib/material-tailwind";
+import { Typography } from "@/lib/material-tailwind";
 import { CurrencyYenIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";

@@ -6,10 +6,10 @@ import {
   Option,
   Select,
   Typography,
-} from "@/app/common/lib/material-tailwind";
+} from "@/lib/material-tailwind";
 import React, { useCallback } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { InputWrapper } from "@/app/common/components/InputWrapper";
+import { InputWrapper } from "@/components/InputWrapper";
 import { NotExpenseCategory, categoryList } from "@/constant";
 import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
 import { useCreateRecord } from "../../api/createRecord";

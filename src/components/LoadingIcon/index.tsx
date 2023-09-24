@@ -1,4 +1,4 @@
-import { Spinner } from "@/app/common/lib/material-tailwind";
+import { Spinner } from "@/lib/material-tailwind";
 
 import React from "react";
 
