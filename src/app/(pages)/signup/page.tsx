@@ -1,7 +1,7 @@
 "use client";
 import { InputWrapper } from "@/components/InputWrapper";
 import { Card, Input, Button, Typography } from "@/lib/material-tailwind";
-import { useAuth } from "@/app/hooks/useAuth";
+import { useLogin } from "@/app/hooks/useLogin";
 import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
 import { auth, provider } from "@/firebase/client";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
@@ -20,7 +20,7 @@ type FormInputsType = {
 
 export default function Page() {
   const router = useRouter();
-  const { isLoading, login } = useAuth();
+  const { isLoading, login } = useLogin();
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowRePassword, setIsShowRePassword] = useState(false);
 

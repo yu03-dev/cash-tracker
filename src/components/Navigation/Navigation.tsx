@@ -1,7 +1,6 @@
 "use client";
 import React, { useCallback, useState } from "react";
 import Link from "next/link";
-import { useAuth } from "@/app/hooks/useAuth";
 import {
   Avatar,
   Card,
@@ -23,10 +22,11 @@ import {
 import { useGetProfile } from "@/app/hooks/useGetProfile";
 import { useMutateSnackbar } from "@/app/hooks/useMutateSnackbar";
 import { useRouter } from "next/navigation";
+import { useLogout } from "@/app/hooks/useLogout";
 
 const NavigationItemList = () => {
   const router = useRouter();
-  const { isLoading, logout } = useAuth();
+  const { isLoading, logout } = useLogout();
   const { name, picture, email } = useGetProfile();
 
   const handleLogout = useCallback(async () => {
